@@ -65,7 +65,6 @@ def filterData(countsFile, metaFile, refFilter = None):
     
     #import sample metadata
     sampleMeta = pd.read_csv(metaFile)
-    sampleMeta.rename(columns={sampleMeta.columns[0]:'sampleLong'}, inplace=True)
     refRemove = sampleMeta[sampleMeta['reference'] == 'REMOVE']['short_name'].values.astype('str')
     
     #optionally remove references above a divergence cutoff
@@ -122,7 +121,8 @@ def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix):
     plt.savefig(filePrefix+' UMAP DBSCAN (epsilon ' + str(epsilon)+').png', dpi = 300)
     
     plot.umapReference(snpProportion, embedding, sampleMeta, db_communities)
-    plt.savefig(filePrefix+' UMAP references (DBSCAN clusters).png', dpi = 300)
+    plt.savefig(filePrefix+' UMAP references (DBSCAN clusters, epsilon ' + str(epsilon)+').png', dpi = 300)
+
 
     plot.histogramDivergence(snpProportion,sampleMeta)
     plt.savefig(filePrefix+' histogram divergence.png', dpi = 300)
@@ -211,7 +211,7 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     plot.barchartRef(snpProportion, output, sampleMeta)
     plt.savefig(filePrefix+' bar chart clustering predictions (cut height'+str(cutHeight)+').png', dpi = 300)
     
-    output.to_csv(filePrefix+'_clusteringOutputData.csv', index=False)
+    output.to_csv(filePrefix+'_clusteringOutputData_cutHeight'+str(cutHeight)+'.csv', index=False)
     
     return output
 
