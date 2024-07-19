@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import itertools
 from scipy.spatial.distance import correlation
-import ratioClustering_graphs as plot
+import graphs as plot
 
 
 #Generate the histogram of technical replicate divergence
@@ -83,6 +83,8 @@ def splitReferences(snpProportion, sampleMeta, communities):
         sampleMeta: metadata paired with genotyping data
         communities: DBSCAN cluster number for each sample
 	"""
+    print('Varieties that are split accross multiple clusters')
+    
     refSubset = sampleMeta[pd.notna(sampleMeta['reference_original'])]
     w = refSubset[refSubset['short_name'].isin(snpProportion.columns.astype('int'))]
     
@@ -102,5 +104,4 @@ print('Inventory numbers to check: ', sample[distance > cutoff])
 
 #Flag references with the same original label that turn up  in different DBSCAN clusters and manually check
 #It may be helpful to use  plot.heatmapManyClusters() and plot.heatmapSingleVariety() to understand how to best relabel references
-print('Varieties that are split accross multiple clusters')
 splitReferences(snpProportion, sampleMeta, db_communities)

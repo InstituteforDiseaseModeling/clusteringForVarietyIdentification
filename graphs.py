@@ -401,7 +401,7 @@ def histogramMissingness(snpProportionNoInterpolation):
     ax2.set_xlabel('Percent Missingness')
     plt.tight_layout()
 
-def averageCounts(counts,snpProportion, embedding):
+def averageCounts(countsFile,snpProportion, embedding):
     """
     Plot average counts per gene, UMAP with average counts
 
@@ -410,11 +410,11 @@ def averageCounts(counts,snpProportion, embedding):
         snpProportion: processed SNP proportion data
         embedding: UMAP embedding of data 
     """
-    countsFilter = counts.copy()
-    countsFilter = countsFilter.groupby(['MarkerName']).sum() #combine counts for both alleles
-    countsFilter = countsFilter[snpProportion.columns].loc[snpProportion.index] #subset to the samples, loci in snpProportion
+    counts = pd.read_csv(countsFile, index_col='MarkerName')
+    counts = counts.groupby(['MarkerName']).sum() #combine counts for both alleles
+    counts = counts[snpProportion.columns].loc[snpProportion.index] #subset to the samples, loci in snpProportion
     
-    avgCounts = np.mean(countsFilter, axis = 0)
+    avgCounts = np.mean(counts, axis = 0)
     belowcut = np.where(avgCounts < 200)[0]
     
     ax1, ax2 = plotDouble()
@@ -703,7 +703,7 @@ def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cut
     """
     for clusterNum in np.unique(communities):
         heatmapManyClusters(snpProportion, sampleMeta, communities, [clusterNum], tickType=heatmapTick)
-        plt.savefig(filePrefix+' heatmap cluster '+str(clusterNum)+' (cut height'+str(cutHeight)+').png', dpi = 300)
+        plt.savefig(filePrefix+' heatmap cluster '+str(clusterNum)+'.png', dpi = 300)
 
         dendrogram(snpProportion, sampleMeta, communities, clusterNum, cutHeight, tick_type=dendrogramTick)
         plt.savefig(filePrefix+' dendrogram cluster '+str(clusterNum)+' (cut height'+str(cutHeight)+').png', dpi = 300)
