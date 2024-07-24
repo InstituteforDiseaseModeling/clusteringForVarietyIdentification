@@ -181,7 +181,8 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     output = pd.DataFrame(embedding, columns=['embedding_X', 'embedding_Y'])
     output['cluster'] = db_communities
     output['short_name'] = snpProportion.columns
-    output['divergence'] = plot.homozygousDivergence(snpProportion)
+    if admixedCutoff:
+        output['divergence'] = plot.homozygousDivergence(snpProportion)
     output['variety'] = pd.NA
     
     #for each short_name, find the index in sampleMeta and grab the alt_name

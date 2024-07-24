@@ -9,7 +9,6 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
-import phenograph
 import scipy.cluster.hierarchy as sch
 from sklearn.metrics import adjusted_rand_score
 import graphs as plot
