@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import itertools
 from scipy.spatial.distance import correlation
+import scipy.cluster.hierarchy as sch
 import graphs as plot
 
 
@@ -94,6 +95,31 @@ def splitReferences(snpProportion, sampleMeta, communities):
         if len(np.unique(communities[np.where(np.isin(snpProportion.columns, shortNames))[0]])) > 1:
             splitVar.append(ref)
             print(ref, np.unique(communities[np.where(np.isin(snpProportion.columns, shortNames))[0]]))
+            
+
+def referenceDistance(snpProportion, sampleMeta):
+    """
+    Generate a scatterplot with the max distance between all replicates of the same reference  
+
+    Args:
+        snpProportion: processed SNP proportion data
+        sampleMeta: metadata paired with genotyping data
+	"""
+    refSubset = sampleMeta[pd.notna(sampleMeta['reference'])]
+    w = refSubset[refSubset['short_name'].isin(snpProportion.columns.astype('int'))]
+    
+    maxDistance = []
+    for ref in np.unique(w['reference']):
+        shortNames = w[w['reference_original'] == ref]['short_name'].values.astype('str')
+        if len(shortNames) > 1:
+            maxDistance.append(sch.linkage(snpProportion[shortNames].values.T, metric='correlation')[-1,2])
+    
+    plt.figure()
+    plt.plot(np.arange(len(maxDistance)), np.sort(maxDistance), 'bo-')
+    plt.ylabel('Max distance')
+    plt.xlabel('Proportion of references')
+    plt.xticks(len(maxDistance)*np.arange(0,1.1,0.1), np.around(np.arange(0,1.1,0.1),1))
+    plt.tight_layout()
             
 #Flag references where the technical replicates don't match and generate a heatmap
 percentile = 0.95 #percentile cutoff

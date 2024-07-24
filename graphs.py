@@ -451,7 +451,6 @@ def barchartRef(snpProportion, output, sampleMeta):
     ax.bar_label(ax.containers[0], label_type='edge')
     ax.set_yticks(np.arange(len(callVarieties)),callVarieties[np.argsort(callVarietiesCount)])
     plt.tight_layout()
-
     
 def umapRefLandrace(snpProportion, output, sampleMeta, cutoff, noRef=False):
     """

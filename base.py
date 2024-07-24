@@ -50,7 +50,7 @@ def processCountsSeq(inFile, outFile):
     df.rename(columns={'CloneID': 'MarkerName'}, inplace=True)
     df.to_csv(outFile, index=False)    
 
-def filterData(countsFile, metaFile, refFilter = None):
+def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     '''
     Input the reformatted counts file and paired metadata file, filter out low quality samples/genes and then interpolate missing data 
     
@@ -102,7 +102,7 @@ def embedData(snpProportion, umapSeed):
     return embedding
 
 
-def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix):
+def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff):
     '''
     Input the processed snpProprtion data, embed with UMAP, and then cluster using DBSCAN
     
@@ -123,9 +123,9 @@ def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix):
     plot.umapReference(snpProportion, embedding, sampleMeta, db_communities)
     plt.savefig(filePrefix+' UMAP references (DBSCAN clusters, epsilon ' + str(epsilon)+').png', dpi = 300)
 
-
-    plot.histogramDivergence(snpProportion,sampleMeta)
-    plt.savefig(filePrefix+' histogram divergence.png', dpi = 300)
+    if admixedCutoff:
+        plot.histogramDivergence(snpProportion,sampleMeta)
+        plt.savefig(filePrefix+' histogram divergence.png', dpi = 300)
    
     return db_communities
 
@@ -184,6 +184,13 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     output['divergence'] = plot.homozygousDivergence(snpProportion)
     output['variety'] = pd.NA
     
+    #for each short_name, find the index in sampleMeta and grab the alt_name
+    countryID = []
+    for short_name in snpProportion.columns:
+        countryID.append(sampleMeta[sampleMeta['short_name'] == int(short_name)]['alt_name'].values[0])
+    output['countryID'] = countryID
+    
+    
     for cluster in np.unique(db_communities):
         if cluster == -1: #-1 indicates samples that are disconnected from the rest of the clusters  
             subsetIndex = np.where(db_communities == cluster)[0]
@@ -197,7 +204,6 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
             Y_cluster = sch.linkage(snpProportion[snpProportion.columns[subsetIndex]].values.T, metric='correlation')
             
             #label samples
-            
             communities, names = rand.labelHCLandrace(snpProportion[snpProportion.columns[subsetIndex]], sampleMeta, Y_cluster, cutHeight, clusterNumber = cluster, admixedCutoff = admixedCutoff)
             varietiesList = []
             for i in communities.astype('int'):
@@ -246,7 +252,7 @@ def loadParameters(parameterFile):
     return minSample, minloci, umapSeed, epsilon, cutHeight, admixedCutoff, filePrefix, inputCountsFile, inputMetaFile
 
 minSample, minloci, umapSeed, epsilon, cutHeight, admixedCutoff, filePrefix, inputCountsFile, inputMetaFile = loadParameters(parameterFile)
-snpProportion, snpProportionNoInterpolation, sampleMeta = filterData(inputCountsFile, inputMetaFile)
+snpProportion, snpProportionNoInterpolation, sampleMeta = filterData(inputCountsFile, inputMetaFile, minloci, minSample)
 embedding = embedData(snpProportion, umapSeed)
-db_communities = clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix)
+db_communities = clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff)
 output = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix)
