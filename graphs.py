@@ -707,3 +707,37 @@ def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cut
         dendrogram(snpProportion, sampleMeta, communities, clusterNum, cutHeight, tick_type=dendrogramTick)
         plt.savefig(filePrefix+' dendrogram cluster '+str(clusterNum)+' (cut height'+str(cutHeight)+').png', dpi = 300)
 
+def barchartLandrace(snpProportion, output, sampleMeta):
+    """
+    Barchart with the prevalence of each observed reference variety
+
+    Args:
+        snpProportion: processed SNP proportion data
+        output: output dataframe frome base.py
+        sampleMeta: metadata paired with genotyping data
+    """
+    w = sampleMeta[sampleMeta['short_name'].isin(snpProportion.columns.astype('int'))]
+    var, counts = np.unique(output['variety'], return_counts=True)
+    
+    refshort = w['short_name'][(sampleMeta['reference'].notna())].values.astype('str') #references
+    admixedshort = output['short_name'][output['variety'] == 'Admixed'].values.astype('str') #admixed
+    
+    landraceName = var[np.flatnonzero(np.core.defchararray.find(var.astype('str'),'Genetic entity')!=-1)]
+    landraceShort = output['short_name'][np.isin(output['variety'],landraceName)].values.astype('str')
+    landraceVarieties, landraceVarietiesCount = np.unique(output[output['short_name'].isin(landraceShort)]['variety'], return_counts=True)
+    
+    cutoff = 2
+    landraceVarietiesFilter =landraceVarieties[landraceVarietiesCount > cutoff]
+    landraceVarietiesCountFilter = landraceVarietiesCount[landraceVarietiesCount > cutoff]
+
+    fig, ax = plt.subplots(figsize=(14.4,4.8))
+    ax.barh(np.arange(len(landraceVarietiesFilter)), landraceVarietiesCountFilter[np.argsort(landraceVarietiesCountFilter)])
+    ax.bar_label(ax.containers[0], label_type='edge')
+    ax.set_yticks(np.arange(len(landraceVarietiesFilter)),landraceVarietiesFilter[np.argsort(landraceVarietiesCountFilter)])
+    plt.tight_layout()
+
+    #histogram of occurences of genetic entities
+    plt.figure()
+    plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
+    plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
+    plt.tight_layout()
