@@ -3,7 +3,9 @@
 '''
 Variety calls from counts data using clustering
 '''
-
+import argparse
+import os
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import json
@@ -102,7 +104,7 @@ def embedData(snpProportion, umapSeed):
     return embedding
 
 
-def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff):
+def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff, outputDir):
     '''
     Input the processed snpProprtion data, embed with UMAP, and then cluster using DBSCAN
     
@@ -112,34 +114,36 @@ def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, 
         embedding: UMAP embedding of snpProportion
         epsilon: epsilon parameter for DBSCAN clustering
         filePrefix: prefix for output filenames
+        outputDir: directory for output files
     '''    
     #cluster using DBSCAN
     db_communities = DBSCAN(eps=epsilon, min_samples=2).fit(embedding).labels_
     
     #save output figures
     plot.umapCluster(embedding, db_communities)
-    plt.savefig(filePrefix+' UMAP DBSCAN (epsilon ' + str(epsilon)+').png', dpi = 300)
+    plt.savefig(getOutputFilepath(outputDir, filePrefix+' UMAP DBSCAN (epsilon ' + str(epsilon)+').png'), dpi = 300)
     
     plot.umapReference(snpProportion, embedding, sampleMeta, db_communities)
-    plt.savefig(filePrefix+' UMAP references (DBSCAN clusters, epsilon ' + str(epsilon)+').png', dpi = 300)
+    plt.savefig(getOutputFilepath(outputDir, filePrefix+' UMAP references (DBSCAN clusters, epsilon ' + str(epsilon)+').png'), dpi = 300)
 
     if admixedCutoff:
         plot.histogramDivergence(snpProportion,sampleMeta)
-        plt.savefig(filePrefix+' histogram divergence.png', dpi = 300)
+        plt.savefig(getOutputFilepath(outputDir, filePrefix+' histogram divergence.png'), dpi = 300)
    
     return db_communities
 
-def evaluateEpsilon(embedding, filePrefix):
+def evaluateEpsilon(embedding, filePrefix, outputDir):
     '''
     Evaluate different epsilon values for DBSCAN
         
     Args:
         embedding: UMAP embedding of snpProportion
         filePrefix: prefix for output filenames
+        outputDir: directory for output files
     '''
     ks = np.around(np.arange(0.1,1.1,0.05), 2) # Range of epsilon values for DBSCAN
     rand.randScoreMatrix(embedding, ks, 'DBSCAN')
-    plt.savefig(filePrefix+' DBSCAN rand matrix.png', dpi = 300)    
+    plt.savefig(getOutputFilepath(outputDir, filePrefix+' DBSCAN rand matrix.png'), dpi = 300)    
 
 def evaluateCutHeight(snpProportion, sampleMeta, db_communities, admixedCutoff, minRepTogether = 0.0, maxVarietyTogether = 4):
     '''
@@ -164,7 +168,7 @@ def evaluateCutHeight(snpProportion, sampleMeta, db_communities, admixedCutoff, 
     ks = np.around(np.intersect1d(cuts[np.where(rep > minRepTogether*totalRef)], cuts[np.where(avg < maxVarietyTogether)]),3) 
     rand.randScoreMatrix(snpProportion, ks, 'HC', sampleMeta = sampleMeta, admixedCutoff = admixedCutoff)
 
-def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, admixedCutoff, filePrefix):
+def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, admixedCutoff, filePrefix, outputDir):
     '''
     Evaluate different cut height values for processing the dendrogram
     
@@ -176,6 +180,7 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
         cutHeight: cutoff value for cutting a dendrogram into clusters
         admixedCutoff: clades without a reference and a minimum divergence value above this will be labeled as admixed
         filePrefix: prefix for output filenames
+        outputDir: directory for output files
     '''
     #consolidate outputs
     output = pd.DataFrame(embedding, columns=['embedding_X', 'embedding_Y'])
@@ -213,20 +218,29 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     
     #save outputs
     plot.umapRefLandrace(snpProportion, output, sampleMeta, 5, noRef=True)
-    plt.savefig(filePrefix+' UMAP clustering predictions (cut height'+str(cutHeight)+').png', dpi = 300)
+    plt.savefig(getOutputFilepath(outputDir, filePrefix+' UMAP clustering predictions (cut height'+str(cutHeight)+').png'), dpi = 300)
     
     plot.barchartRef(snpProportion, output, sampleMeta)
-    plt.savefig(filePrefix+' bar chart clustering predictions (cut height'+str(cutHeight)+').png', dpi = 300)
+    plt.savefig(getOutputFilepath(outputDir, filePrefix+' bar chart clustering predictions (cut height'+str(cutHeight)+').png'), dpi = 300)
     
-    output.to_csv(filePrefix+'_clusteringOutputData_cutHeight'+str(cutHeight)+'.csv', index=False)
+    output.to_csv(getOutputFilepath(outputDir, filePrefix+'_clusteringOutputData_cutHeight'+str(cutHeight)+'.csv'), index=False)
     
     return output
 
-def loadParameters(parameterFile):
+def getOutputFilepath(outputDir, filename):
+    return os.path.join(outputDir, os.path.basename(filename))
+
+def main():
+    if not parameters:
+        print("""No parameters provided. Please provide parameters via: 
+        -j or --json CLI argument passing in a JSON string 
+        -f or --file CLI argument passing in a JSON file path 
+        or set the parametersFile variable to the path of a JSON file in your environment""")
+        raise Exception('No parameters provided')
+
     '''
-    load a json file with all of the parameters
-    
     Args:
+        outputDir: directory for output files, defaults to ./output
         minSample: samples must be missing from less than X loci
         minloci: loci must be absent from less than Y samples
         umapSeed: RNG seed for UMAP
@@ -236,24 +250,40 @@ def loadParameters(parameterFile):
         filePrefix: prefix for output filenames
         inputCountsFile: name and path to DArT counts file
         inputMetaFile: name and path to the metadata file paired with the countsFile
-    '''
-    with open(parameterFile) as f:
-        data = json.load(f)
-        
-    minSample = data["minSample"]
-    minloci = data["minloci"]
-    umapSeed = data["umapSeed"]
-    epsilon = data["epsilon"]
-    cutHeight = data["cutHeight"]
-    admixedCutoff = data["admixedCutoff"]
-    filePrefix = data["filePrefix"]
-    inputCountsFile = data["inputCountsFile"]
-    inputMetaFile = data["inputMetaFile"]
-    
-    return minSample, minloci, umapSeed, epsilon, cutHeight, admixedCutoff, filePrefix, inputCountsFile, inputMetaFile
+    ''' 
+    outputDir = parameters.get('outputDir', './output')
+    minSample = parameters["minSample"]
+    minloci = parameters["minloci"]
+    umapSeed = parameters["umapSeed"]
+    epsilon = parameters["epsilon"]
+    cutHeight = parameters["cutHeight"]
+    admixedCutoff = parameters["admixedCutoff"]
+    filePrefix = parameters["filePrefix"]
+    inputCountsFile = parameters["inputCountsFile"]
+    inputMetaFile = parameters["inputMetaFile"]
 
-minSample, minloci, umapSeed, epsilon, cutHeight, admixedCutoff, filePrefix, inputCountsFile, inputMetaFile = loadParameters(parameterFile)
-snpProportion, snpProportionNoInterpolation, sampleMeta = filterData(inputCountsFile, inputMetaFile, minloci, minSample)
-embedding = embedData(snpProportion, umapSeed)
-db_communities = clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff)
-output = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix)
+    # Create output directory if it doesn't exist
+    Path(outputDir).mkdir(parents=True, exist_ok=True)
+
+    snpProportion, snpProportionNoInterpolation, sampleMeta = filterData(inputCountsFile, inputMetaFile, minloci, minSample)
+    embedding = embedData(snpProportion, umapSeed)
+    db_communities = clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff, outputDir)
+    output = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix, outputDir)
+
+
+parameters = None
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Variety calls from counts data using clustering')
+    parser.add_argument('-f', '--file', help='JSON file path with parameters', required=False)
+    parser.add_argument('-j', '--json', type=json.loads, help='JSON string with parameters', required=False)
+    args = parser.parse_args()
+
+    if args.json:
+        parameters = args.json
+    elif args.file:
+        parameters = json.loads(open(args.file).read())
+
+if not parameters and ('parameterFile' in locals() or 'parameterFile' in globals()):
+    parameters = json.loads(open(parameterFile).read())
+
+main()
