@@ -14,42 +14,6 @@ import scipy.cluster.hierarchy as sch
 import graphs as plot
 import randMatrix as rand
  
-def processCounts(inFile, outFile):
-    '''
-    Process DArT tag counts file into the correct input format
-    
-    Args:
-        inFile: name and path to counts file
-        outFile: name and path for output file
-    '''
-    df = pd.read_csv(inFile, skiprows=7)
-    notData = ['AlleleSequence','SNP','CallRate','OneRatioRef',
-            'OneRatioSnp','FreqHomRef','FreqHomSnp','FreqHets',
-            'PICRef','PICSnp','AvgPIC','AvgCountRef','AvgCountSnp',
-            'RatioAvgCountRefAvgCountSnp']
-    df = df.drop(columns=notData)
-    df.to_csv(outFile, index=False)    
- 
-def processCountsSeq(inFile, outFile):  
-    '''
-    Process DArT seq counts file into the correct input format
-    
-    Args:
-        inFile: name and path to counts file
-        outFile: name and path for output file
-    '''  
-    df = pd.read_csv(inFile, skiprows =7)
-    notData = ['AlleleID', 'AlleleSequence', 'TrimmedSequence',
-           'Chrom_Eragrostis_CogeV3', 'ChromPosTag_Eragrostis_CogeV3',
-           'ChromPosSnp_Eragrostis_CogeV3', 'AlnCnt_Eragrostis_CogeV3',
-           'AlnEvalue_Eragrostis_CogeV3', 'Strand_Eragrostis_CogeV3', 'SNP',
-           'SnpPosition', 'CallRate', 'OneRatioRef', 'OneRatioSnp', 'FreqHomRef',
-           'FreqHomSnp', 'FreqHets', 'PICRef', 'PICSnp', 'AvgPIC', 'AvgCountRef',
-           'AvgCountSnp', 'RepAvg']
-    df = df.drop(columns=notData)    
-    df.rename(columns={'CloneID': 'MarkerName'}, inplace=True)
-    df.to_csv(outFile, index=False)    
-
 def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     '''
     Input the reformatted counts file and paired metadata file, filter out low quality samples/genes and then interpolate missing data 
@@ -62,6 +26,10 @@ def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     #import counts data
     counts = pd.read_csv(countsFile, index_col='MarkerName')
     snpProportion = counts.groupby(['MarkerName']).first()/counts.groupby(['MarkerName']).sum() #if the count for both SNPs are zero --> NaN
+    
+    #check that all marker names are unique
+    marker, markerCount = np.unique(counts.index, return_counts=True)
+    if len(np.where(markerCount > 2)[0]) > 0: print('Multiple markers in same gene, differentiate marker names in the count file')
     
     #import sample metadata
     sampleMeta = pd.read_csv(metaFile)

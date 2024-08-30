@@ -84,7 +84,7 @@ def splitReferences(snpProportion, sampleMeta, communities):
         sampleMeta: metadata paired with genotyping data
         communities: DBSCAN cluster number for each sample
 	"""
-    print('Varieties that are split accross multiple clusters')
+    print('Varieties that are split across multiple clusters')
     
     refSubset = sampleMeta[pd.notna(sampleMeta['reference_original'])]
     w = refSubset[refSubset['short_name'].isin(snpProportion.columns.astype('int'))]
