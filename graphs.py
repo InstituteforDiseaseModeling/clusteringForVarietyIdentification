@@ -335,9 +335,9 @@ def heatmapSingleVariety(snpProportion, sampleMeta, variety, tick_type):
         snpProportion: processed SNP proportion data
         sampleMeta: metadata paired with genotyping data
         variety: variety name
-        tickType: 'inventory' (inventory number), 'short_name' (sample number), 'divergence' (label divergence score)
+        tickType: 'inventory' (inventory number), 'short_name' (sample number), 'divergence' (label divergence score), 'source' (sample source)
     """
-    refShort = sampleMeta[sampleMeta['reference'] == variety]['short_name'].values.astype('str')
+    refShort = sampleMeta[sampleMeta['reference_original'] == variety]['short_name'].values.astype('str')
     subset = snpProportion[snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))]].values
     subsetReorder, clusterOrder, breakPoints = clusterReorder(subset, [subset.shape[1]])
         
@@ -358,7 +358,14 @@ def heatmapSingleVariety(snpProportion, sampleMeta, variety, tick_type):
         labels = sampleOrder
 
     if tick_type == 'divergence': #add sample divergence to x-ticks
-            labels = np.around(homozygousDivergence(subsetReorder),2)
+        labels = np.around(homozygousDivergence(subsetReorder),2)
+            
+    if tick_type == 'source': #add sample source to x-ticks
+        sampleOrder = snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))][clusterOrder]
+        labels = []
+        for sample in sampleOrder:
+            labels.append(sampleMeta[sampleMeta['short_name'] == int(sample)]['source_info'].values[0])
+
 
     ax1.set_xticks(np.arange(len(labels)), labels, rotation = 90)
 
