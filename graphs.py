@@ -748,3 +748,55 @@ def barchartLandrace(snpProportion, output, sampleMeta):
     plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
     plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
     plt.tight_layout()
+
+def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight):
+    """
+    Paired dendrogram and heatmap for the same cluster
+
+    Args:
+        snpProportion: processed SNP proportion data
+        sampleMeta: metadata paired with genotyping data
+        communities: DBSCAN cluster number for each sample
+        COI: DBSCAN cluster to plot
+        cutHeight: cutoff value for cutting a dendrogram into clusters 
+    """
+    fig = plt.figure(figsize=(7.2,12))
+    gs=GridSpec(2,2, width_ratios=[0.2,6], height_ratios=[1,1], figure = fig)    
+
+    #dendrogram half
+    clusterSubset = snpProportion[snpProportion.columns[np.where(communities == COI)]]
+    Y_cluster = sch.linkage(clusterSubset.values.T, metric='correlation') #sort samples
+                 
+    #plot dendrogram
+    ax1 = plt.subplot(gs[0,1])
+    sch.dendrogram(Y_cluster, color_threshold = cutHeight, no_labels = True)
+    ax1.set_title('Cluster '+str(COI))
+
+    #heatmap half
+    subset = snpProportion[snpProportion.columns[np.where(communities == COI)[0]]].values
+    subsetReorder, clusterOrder, breakPoints = clusterReorder(subset, [subset.shape[1]])
+    references = sampleMeta[(sampleMeta['reference'].notna())]
+    referencesIndex = np.where(np.isin(snpProportion.columns, references['short_name'].astype('str')))[0]
+    
+    ax2 = plt.subplot(gs[1,0])
+    ax3 = plt.subplot(gs[1,1])
+    SC=ax3.imshow(subsetReorder, aspect='auto', interpolation='none', cmap='coolwarm',vmin=0,vmax = 1)
+    ax3.set_yticks([])
+    plt.colorbar(SC, cax=ax2)
+    
+    #add reference labels to x-axis
+    numInRef, numInCluster, numInZ = np.intersect1d(referencesIndex, np.where(communities == COI)[0], return_indices=True) #number of the reference
+    if len(numInRef) > 0:
+        ticks = []
+        labels = []
+        for i in range(len(numInRef)):
+            ticks.append(np.where(clusterOrder == numInZ[i])[0][0])
+            labels.append(sampleMeta[sampleMeta['short_name'] == int(snpProportion.columns[numInRef[i]])]['reference'].values[0])      
+        ax3.set_xticks(ticks, labels, rotation = 90)
+        
+    else:
+        ax3.set_xticks([])
+        
+    ax2.yaxis.tick_left()    
+    plt.tight_layout()
+
