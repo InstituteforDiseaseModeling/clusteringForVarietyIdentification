@@ -294,58 +294,28 @@ def heatmapManyClusters(snpProportion, sampleMeta, communities, allCOI, tickType
 
     plt.colorbar(SC, cax=plt.subplot(gs[len(allCOI)]))
     plt.tight_layout()
-    
-def heatmapReference(snpProportion, sampleMeta, communities):
-    """
-    Heatmap of references 
 
-    Args:
-        snpProportion: processed SNP proportion data
-        sampleMeta: metadata paired with genotyping data
-        communities: DBSCAN cluster number for each sample
-    """
-    references = sampleMeta[(sampleMeta['reference'].notna())]
-    referencesIndex = np.where(np.isin(snpProportion.columns, references['short_name'].astype('str')))[0]
-    _, clusterCounts = np.unique(communities[referencesIndex], return_counts=True)
-    
-    #sort snpProportion columns by cluster number
-    sortByCluster = communities[referencesIndex].argsort()
-    
-    subset = snpProportion[snpProportion.columns[referencesIndex[sortByCluster]]].values
-    subsetReorder, clusterOrder, breakPoints = clusterReorder(subset, clusterCounts)
-    
-    #short_names in order
-    xLabels = []
-    for sample in snpProportion.columns[referencesIndex[sortByCluster]][clusterOrder].astype('int'):
-        xLabels.append(sampleMeta[sampleMeta['short_name'] == sample]['reference'].values[0])
-    
-    fig = plt.figure(figsize=(7.2,6))
-    gs=GridSpec(1,1, figure = fig)
-    ax1 = plt.subplot(gs[0])
-    ax1.imshow(subsetReorder, aspect='auto', interpolation='none', cmap='coolwarm',vmin=0,vmax = 1)
-    ax1.set_yticks([])
-    ax1.set_xticks(np.arange(len(referencesIndex)), xLabels, rotation = 90)
-    plt.tight_layout()
-
-def heatmapSingleVariety(snpProportion, sampleMeta, variety, tick_type):
+def heatmapReferences(snpProportion, sampleMeta, allVarieties, tick_type):
     """
     Heatmap of samples in a single variety 
 
     Args:
         snpProportion: processed SNP proportion data
         sampleMeta: metadata paired with genotyping data
-        variety: variety name
+        allVarieties: list of variety names
         tickType: 'inventory' (inventory number), 'short_name' (sample number), 'divergence' (label divergence score), 'source' (sample source)
     """
-    refShort = sampleMeta[sampleMeta['reference_original'] == variety]['short_name'].values.astype('str')
-    subset = snpProportion[snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))]].values
+    
+    refShort = sampleMeta[np.isin(sampleMeta['reference_original'],allVarieties)]['short_name'].values.astype('str')
+    refShort = refShort[np.isin(refShort.astype(str), snpProportion.columns)]
+    subset = snpProportion[refShort].values
     subsetReorder, clusterOrder, breakPoints = clusterReorder(subset, [subset.shape[1]])
         
     ax1, ax2 = plotTemplate()
     SC=ax1.imshow(subsetReorder, aspect='auto', interpolation='none', cmap='coolwarm',vmin=0,vmax = 1)
     ax1.set_yticks([])
     plt.colorbar(SC, cax=ax2)
-    ax1.set_title('Variety '+variety)
+    ax1.set_title(allVarieties)
     
     if tick_type == 'inventory': #add inventory number to x-ticks
         sampleOrder = snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))][clusterOrder]
@@ -359,17 +329,19 @@ def heatmapSingleVariety(snpProportion, sampleMeta, variety, tick_type):
 
     if tick_type == 'divergence': #add sample divergence to x-ticks
         labels = np.around(homozygousDivergence(subsetReorder),2)
-            
+    
     if tick_type == 'source': #add sample source to x-ticks
         sampleOrder = snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))][clusterOrder]
         labels = []
         for sample in sampleOrder:
-            labels.append(sampleMeta[sampleMeta['short_name'] == int(sample)]['source_info'].values[0])
+            row = sampleMeta[sampleMeta['short_name'] == int(sample)]
+            labels.append(row['reference'].values[0]+', '+row['seedSource'].values[0])
 
 
     ax1.set_xticks(np.arange(len(labels)), labels, rotation = 90)
 
     plt.tight_layout()
+
 
 
 def umapMissingness(snpProportionNoInterpolation, embedding, missingnessCutoff = 0.05):
