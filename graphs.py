@@ -9,6 +9,7 @@ import scipy.cluster.hierarchy as sch
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.gridspec import GridSpec
+import pandas as pd
 
 def clusterReorder(subset, counts):
     """
@@ -297,13 +298,13 @@ def heatmapManyClusters(snpProportion, sampleMeta, communities, allCOI, tickType
 
 def heatmapReferences(snpProportion, sampleMeta, allVarieties, tick_type):
     """
-    Heatmap of samples in a single variety 
+    Heatmap of reference samples from a list of varieties
 
     Args:
         snpProportion: processed SNP proportion data
         sampleMeta: metadata paired with genotyping data
         allVarieties: list of variety names
-        tickType: 'inventory' (inventory number), 'short_name' (sample number), 'divergence' (label divergence score), 'source' (sample source)
+        tickType: 'inventory' (inventory number), 'short_name' (sample number), 'divergence' (label divergence score), 'source' (sample source), 'references' (reference name)
     """
     
     refShort = sampleMeta[np.isin(sampleMeta['reference_original'],allVarieties)]['short_name'].values.astype('str')
@@ -317,25 +318,27 @@ def heatmapReferences(snpProportion, sampleMeta, allVarieties, tick_type):
     plt.colorbar(SC, cax=ax2)
     ax1.set_title(allVarieties)
     
+    sampleOrder = refShort[clusterOrder]
+    labels = []
+
     if tick_type == 'inventory': #add inventory number to x-ticks
-        sampleOrder = snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))][clusterOrder]
-        labels = []
         for sample in sampleOrder:
             labels.append(sampleMeta[sampleMeta['short_name'] == int(sample)]['inventory'].values[0])
 
     if tick_type == 'short_name': #add short_name to x-ticks
-        sampleOrder = snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))][clusterOrder]
         labels = sampleOrder
-
-    if tick_type == 'divergence': #add sample divergence to x-ticks
-        labels = np.around(homozygousDivergence(subsetReorder),2)
     
     if tick_type == 'source': #add sample source to x-ticks
-        sampleOrder = snpProportion.columns[np.isin(snpProportion.columns,refShort.astype(str))][clusterOrder]
-        labels = []
         for sample in sampleOrder:
             row = sampleMeta[sampleMeta['short_name'] == int(sample)]
             labels.append(row['reference'].values[0]+', '+row['seedSource'].values[0])
+
+    if tick_type == 'references': #add reference labels to x-ticks (all references)
+        for sample in sampleOrder:
+            labels.append(sampleMeta[sampleMeta['short_name'] == int(sample)]['reference'].values[0])
+            
+    if tick_type == 'divergence': #add sample divergence to x-ticks
+        labels = np.around(homozygousDivergence(subsetReorder),2)
 
 
     ax1.set_xticks(np.arange(len(labels)), labels, rotation = 90)
@@ -380,7 +383,7 @@ def histogramMissingness(snpProportionNoInterpolation):
     ax2.set_xlabel('Percent Missingness')
     plt.tight_layout()
 
-def averageCounts(countsFile,snpProportion, embedding):
+def histogramAverageCounts(countsFile,snpProportion, embedding):
     """
     Plot average counts per gene, UMAP with average counts
 
