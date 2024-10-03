@@ -689,7 +689,7 @@ def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cut
         dendrogram(snpProportion, sampleMeta, communities, clusterNum, cutHeight, tick_type=dendrogramTick)
         plt.savefig(filePrefix+' dendrogram cluster '+str(clusterNum)+' (cut height'+str(cutHeight)+').png', dpi = 300)
 
-def barchartLandrace(snpProportion, output, sampleMeta):
+def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None):
     """
     Barchart with the prevalence of each observed reference variety
 
@@ -697,6 +697,7 @@ def barchartLandrace(snpProportion, output, sampleMeta):
         snpProportion: processed SNP proportion data
         output: output dataframe frome base.py
         sampleMeta: metadata paired with genotyping data
+        filePrefix: optional prefix for output filenames to save
     """
     w = sampleMeta[sampleMeta['short_name'].isin(snpProportion.columns.astype('int'))]
     var, counts = np.unique(output['variety'], return_counts=True)
@@ -717,12 +718,15 @@ def barchartLandrace(snpProportion, output, sampleMeta):
     ax.bar_label(ax.containers[0], label_type='edge')
     ax.set_yticks(np.arange(len(landraceVarietiesFilter)),landraceVarietiesFilter[np.argsort(landraceVarietiesCountFilter)])
     plt.tight_layout()
-
+    if filePrefix:
+        plt.savefig(filePrefix + ' barchart landrace horizontal.png', dpi = 300)
     #histogram of occurences of genetic entities
     plt.figure()
     plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
     plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
     plt.tight_layout()
+    if filePrefix:
+        plt.savefig(filePrefix + ' barchart landrace vertical.png', dpi = 300)
 
 def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight):
     """
