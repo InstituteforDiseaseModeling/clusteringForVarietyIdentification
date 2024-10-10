@@ -689,7 +689,7 @@ def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cut
         dendrogram(snpProportion, sampleMeta, communities, clusterNum, cutHeight, tick_type=dendrogramTick)
         plt.savefig(filePrefix+' dendrogram cluster '+str(clusterNum)+' (cut height'+str(cutHeight)+').png', dpi = 300)
 
-def barchartLandrace(snpProportion, output, sampleMeta):
+def barchartLandrace(snpProportion, output, sampleMeta, cutoff = 2):
     """
     Barchart with the prevalence of each observed reference variety
 
@@ -708,7 +708,6 @@ def barchartLandrace(snpProportion, output, sampleMeta):
     landraceShort = output['short_name'][np.isin(output['variety'],landraceName)].values.astype('str')
     landraceVarieties, landraceVarietiesCount = np.unique(output[output['short_name'].isin(landraceShort)]['variety'], return_counts=True)
     
-    cutoff = 2
     landraceVarietiesFilter =landraceVarieties[landraceVarietiesCount > cutoff]
     landraceVarietiesCountFilter = landraceVarietiesCount[landraceVarietiesCount > cutoff]
 
