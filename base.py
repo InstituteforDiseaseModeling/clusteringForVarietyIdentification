@@ -111,29 +111,6 @@ def evaluateEpsilon(embedding, filePrefix):
     rand.randScoreMatrix(embedding, ks, 'DBSCAN')
     plt.savefig(filePrefix+' DBSCAN rand matrix.png', dpi = 300)    
 
-def evaluateCutHeight(snpProportion, sampleMeta, db_communities, admixedCutoff, minRepTogether = 0.0, maxVarietyTogether = 4):
-    '''
-    Evaluate different cut height values for processing the dendrogram
-    
-    Args:
-        snpProportion: processed SNP proportion data
-        sampleMeta: metadata paired with genotyping data
-        db_communities: DBSCAN cluster number for each sample
-        admixedCutoff: clades without a reference and a minimum divergence value above this will be labeled as admixed
-        minRepTogether: the minimum proportion of reference technical replicates that are in the same clade
-        maxVarietyTogether: the maximum average number of varieties in the same clade (for clusters with at least one reference)
-    '''
-
-    #evaluate using the largest cluster 
-    db_cluster, db_counts = np.unique(db_communities, return_counts=True)
-    mainCluster = db_cluster[np.where(db_counts == max(db_counts))[0][0]]
-    clusterSubsetLarge = snpProportion[snpProportion.columns[np.where(db_communities == mainCluster)]]
-    Y_clusterLarge = sch.linkage(clusterSubsetLarge.values.T, metric='correlation') #sort samples
-    rep, avg, totalRef, cuts = rand.cutoffQuality(clusterSubsetLarge, sampleMeta, Y_clusterLarge)
-
-    ks = np.around(np.intersect1d(cuts[np.where(rep > minRepTogether*totalRef)], cuts[np.where(avg < maxVarietyTogether)]),3) 
-    rand.randScoreMatrix(snpProportion, ks, 'HC', sampleMeta = sampleMeta, admixedCutoff = admixedCutoff)
-
 def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, admixedCutoff, filePrefix):
     '''
     Evaluate different cut height values for processing the dendrogram
