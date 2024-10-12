@@ -690,9 +690,8 @@ def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cut
         plt.savefig(filePrefix+' dendrogram cluster '+str(clusterNum)+' (cut height'+str(cutHeight)+').png', dpi = 300)
 
 def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None, cutoff = 2):
-
     """
-    Barchart with the prevalence of each observed reference variety
+    Barchart with the prevalence of each observed genetic entity
 
     Args:
         snpProportion: processed SNP proportion data
@@ -700,12 +699,8 @@ def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None, cutof
         sampleMeta: metadata paired with genotyping data
         filePrefix: optional prefix for output filenames to save
     """
-    w = sampleMeta[sampleMeta['short_name'].isin(snpProportion.columns.astype('int'))]
     var, counts = np.unique(output['variety'], return_counts=True)
-    
-    refshort = w['short_name'][(sampleMeta['reference'].notna())].values.astype('str') #references
-    admixedshort = output['short_name'][output['variety'] == 'Admixed'].values.astype('str') #admixed
-    
+        
     landraceName = var[np.flatnonzero(np.core.defchararray.find(var.astype('str'),'Genetic entity')!=-1)]
     landraceShort = output['short_name'][np.isin(output['variety'],landraceName)].values.astype('str')
     landraceVarieties, landraceVarietiesCount = np.unique(output[output['short_name'].isin(landraceShort)]['variety'], return_counts=True)
@@ -719,14 +714,15 @@ def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None, cutof
     ax.set_yticks(np.arange(len(landraceVarietiesFilter)),landraceVarietiesFilter[np.argsort(landraceVarietiesCountFilter)])
     plt.tight_layout()
     if filePrefix:
-        plt.savefig(filePrefix + ' barchart landrace horizontal.png', dpi = 300)
+        plt.savefig(filePrefix + ' genetic entity barchart.png', dpi = 300)
+        
     #histogram of occurences of genetic entities
     plt.figure()
     plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
     plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
     plt.tight_layout()
     if filePrefix:
-        plt.savefig(filePrefix + ' barchart landrace vertical.png', dpi = 300)
+        plt.savefig(filePrefix + ' genetic entity histogram.png', dpi = 300)
 
 def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight):
     """

@@ -21,6 +21,8 @@ def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     Args:
         countsFile: path to reformatted counts file
         metaFile: path to the metadata file paired with the countsFile
+        minSample: samples must be missing counts data from less than X proportion of markers
+        minloci: markers must be have counts data from more than than Y proportion of samples
         refFilter: (optional) remove references with a divergence score above this value
     '''
     #import counts data
@@ -29,7 +31,7 @@ def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     
     #check that all marker names are unique
     marker, markerCount = np.unique(counts.index, return_counts=True)
-    if len(np.where(markerCount > 2)[0]) > 0: print('Multiple markers in same gene, differentiate marker names in the count file')
+    if len(np.where(markerCount > 2)[0]) > 0: print('More than two rows with the same marker name, please differentiate marker names in the count file')
     
     #import sample metadata
     sampleMeta = pd.read_csv(metaFile)
@@ -151,14 +153,7 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     output['short_name'] = snpProportion.columns
     if admixedCutoff:
         output['divergence'] = plot.homozygousDivergence(snpProportion)
-    output['variety'] = pd.NA
-    
-    #for each short_name, find the index in sampleMeta and grab the alt_name
-    countryID = []
-    for short_name in snpProportion.columns:
-        countryID.append(sampleMeta[sampleMeta['short_name'] == int(short_name)]['alt_name'].values[0])
-    output['countryID'] = countryID
-    
+    output['variety'] = pd.NA    
     
     for cluster in np.unique(db_communities):
         if cluster == -1: #-1 indicates samples that are disconnected from the rest of the clusters  
@@ -219,6 +214,15 @@ def loadParameters(parameterFile):
     inputMetaFile = data["inputMetaFile"]
     
     return minSample, minloci, umapSeed, epsilon, cutHeight, admixedCutoff, filePrefix, inputCountsFile, inputMetaFile
+
+def runPipeline(parameterFile):
+    minSample, minloci, umapSeed, epsilon, cutHeight, admixedCutoff, filePrefix, inputCountsFile, inputMetaFile = loadParameters(parameterFile)
+    snpProportion, snpProportionNoInterpolation, sampleMeta = filterData(inputCountsFile, inputMetaFile, minloci, minSample)
+    embedding = embedData(snpProportion, umapSeed)
+    db_communities = clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff)
+    output = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix)
+    
+    return snpProportion, snpProportionNoInterpolation, sampleMeta, embedding, db_communities, output
 
 if __name__ == '__main__':
     minSample, minloci, umapSeed, epsilon, cutHeight, admixedCutoff, filePrefix, inputCountsFile, inputMetaFile = loadParameters(parameterFile)
