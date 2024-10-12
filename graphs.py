@@ -345,26 +345,6 @@ def heatmapReferences(snpProportion, sampleMeta, allVarieties, tick_type):
 
     plt.tight_layout()
 
-
-
-def umapMissingness(snpProportionNoInterpolation, embedding, missingnessCutoff = 0.05):
-    """
-    UMAP where samples are colored by percent data missing
-
-    Args:
-        snpProportionNoInterpolation: SNP proportion data before interpolation
-        embedding: UMAP embedding of data
-        missingnessCutoff: plot samples with a missingness below this value as grey
-    """
-    pm = snpProportionNoInterpolation.isna().sum(axis = 0)/snpProportionNoInterpolation.shape[0]
-    abovecut = np.where(pm > missingnessCutoff)[0]
-    
-    ax1, ax2 = plotTemplate()
-    ax1.scatter(embedding[:, 0], embedding[:, 1], s = 1, c='grey', alpha = 0.1)
-    SC = ax1.scatter(embedding[abovecut, 0], embedding[abovecut, 1], s = 1, c=pm[abovecut])
-    plt.colorbar(SC, cax=ax2)
-    plt.tight_layout()
-
 def histogramMissingness(snpProportionNoInterpolation): 
     """
     Histograms of missingness by sample and marker
