@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as sch
 import graphs as plot
 import randMatrix as rand
+import referenceProcessing
  
 def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     '''

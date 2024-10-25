@@ -35,7 +35,7 @@ def histogramTechnicalRep(snpProportion, sampleMeta):
             distance.append(correlation(subset[:,j[0]],subset[:,j[1]]))  
             sample.append(i)
             
-        
+    
     #histogram of distance between technical replicates
     plt.figure()
     plt.hist(distance, bins = 20)
@@ -44,7 +44,7 @@ def histogramTechnicalRep(snpProportion, sampleMeta):
 
     return np.asarray(distance), np.asarray(sample)
 
-def heatmapTechnicalRep(snpProportion, sampleMeta, divergentDistance, divergentInventory):
+def heatmapTechnicalRep(snpProportion, sampleMeta, percentile):
     """
     Generate a heatmap and dendrogram for each cluster
 
@@ -54,6 +54,12 @@ def heatmapTechnicalRep(snpProportion, sampleMeta, divergentDistance, divergentI
         divergentDistance: list of divergence values for samples
         divergentInventory: sample names in the same order as divergentDistance
 	"""
+    distance, sample = histogramTechnicalRep(snpProportion, sampleMeta)
+    
+    cutoff = distance[np.argsort(distance)[int(np.floor(percentile*len(distance)))]]
+    divergentDistance = distance[distance > cutoff]
+    divergentInventory = sample[distance > cutoff]
+
     refSubset = sampleMeta[pd.notna(sampleMeta['reference_original'])]
     w = refSubset[refSubset['short_name'].isin(snpProportion.columns.astype('int'))]
 
@@ -120,14 +126,3 @@ def referenceDistance(snpProportion, sampleMeta):
     plt.xlabel('Proportion of references')
     plt.xticks(len(maxDistance)*np.arange(0,1.1,0.1), np.around(np.arange(0,1.1,0.1),1))
     plt.tight_layout()
-            
-#Flag references where the technical replicates don't match and generate a heatmap
-percentile = 0.95 #percentile cutoff
-distance, sample = histogramTechnicalRep(snpProportion, sampleMeta)
-cutoff = distance[np.argsort(distance)[int(np.floor(percentile*len(distance)))]]
-heatmapTechnicalRep(snpProportion, sampleMeta, distance[distance > cutoff], sample[distance > cutoff])
-print('Inventory numbers to check: ', sample[distance > cutoff])
-
-#Flag references with the same original label that turn up  in different DBSCAN clusters and manually check
-#It may be helpful to use  plot.heatmapManyClusters() and plot.heatmapSingleVariety() to understand how to best relabel references
-splitReferences(snpProportion, sampleMeta, db_communities)
