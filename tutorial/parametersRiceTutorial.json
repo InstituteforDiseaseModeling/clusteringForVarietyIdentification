@@ -1,0 +1,9 @@
+{"minSample":0.2,
+"minloci":0.2,
+"umapSeed":42,
+"epsilon":0.75,
+"cutHeight":0.043,
+"admixedCutoff":null,
+"filePrefix":"riceTutorial",
+"inputCountsFile":"countsRiceTutorial.csv",
+"inputMetaFile":"metadataRiceTutorial.csv"}

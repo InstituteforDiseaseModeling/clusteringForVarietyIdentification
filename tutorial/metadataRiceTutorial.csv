@@ -1,0 +1,1020 @@
+alt_name,short_name,inventory,reference_original,reference,seedSource,seedType
+169,1000081,R1,Variety-1,Variety-1,SourceA,Breeder seed
+170,1000082,R1,Variety-1,Variety-1,SourceA,Breeder seed
+97,1000010,R2,Variety-2,Variety-2,SourceA,Breeder seed
+98,1000011,R2,Variety-2,Variety-2,SourceA,Breeder seed
+101,1000012,R3,Variety-3,Variety-3,SourceA,Breeder seed
+102,1000013,R3,Variety-3,Variety-3,SourceA,Breeder seed
+105,1000014,R4,Variety-4,Variety-4,SourceA,Breeder seed
+106,1000015,R4,Variety-4,Variety-4,SourceA,Breeder seed
+89,1000093,R5,Variety-5,Variety-5,SourceB,Breeder seed
+90,1000094,R5,Variety-5,Variety-5,SourceB,Breeder seed
+171,1000083,R6,Variety-6,Variety-6,SourceB,Breeder seed
+172,1000084,R6,Variety-6,Variety-6,SourceB,Breeder seed
+68,1000071,R7,Variety-7,Variety-7,SourceA,Breeder seed
+93,1000097,R8,Variety-8,Variety-8,SourceB,Breeder seed
+94,1000098,R8,Variety-8,Variety-8,SourceB,Breeder seed
+69,1000072,R9,Variety-9,Variety-9,SourceB,Breeder seed
+70,1000073,R9,Variety-9,Variety-9,SourceB,Breeder seed
+20,1000020,R10,Variety-10,Variety-10,SourceA,Breeder seed
+21,1000021,R10,Variety-10,Variety-10,SourceA,Breeder seed
+109,1000016,R11,Variety-11,Variety-11,SourceA,Breeder seed
+110,1000017,R11,Variety-11,Variety-11,SourceA,Breeder seed
+87,1000089,R12,Variety-11,Variety-11,SourceB,Breeder seed
+88,1000090,R12,Variety-11,Variety-11,SourceB,Breeder seed
+115,1000024,R13,Variety-12,Variety-12,SourceA,Breeder seed
+116,1000025,R13,Variety-12,Variety-12,SourceA,Breeder seed
+117,1000026,R14,Variety-13,Variety-13,SourceA,Breeder seed
+118,1000027,R14,Variety-13,Variety-13,SourceA,Breeder seed
+129,1000032,R15,Variety-14,Variety-14,SourceA,Breeder seed
+130,1000033,R15,Variety-14,Variety-14,SourceA,Breeder seed
+131,1000034,R16,Variety-15,Variety-15,SourceA,Breeder seed
+132,1000035,R16,Variety-15,Variety-15,SourceA,Breeder seed
+133,1000036,R17,Variety-16,Variety-16,SourceA,Breeder seed
+134,1000037,R17,Variety-16,Variety-16,SourceA,Breeder seed
+72,1000074,R18,Variety-16,Variety-16,SourceB,Breeder seed
+135,1000038,R19,Variety-17,Variety-17,SourceA,Breeder seed
+136,1000039,R19,Variety-17,Variety-17,SourceA,Breeder seed
+137,1000043,R20,Variety-18,Variety-18,SourceA,Breeder seed
+138,1000044,R20,Variety-18,Variety-18,SourceA,Breeder seed
+79,1000079,R21,Variety-19,Variety-19,SourceB,Breeder seed
+80,1000080,R21,Variety-19,Variety-19,SourceB,Breeder seed
+139,1000045,R22,Variety-20,Variety-20,SourceA,Breeder seed
+140,1000046,R22,Variety-20,Variety-20,SourceA,Breeder seed
+141,1000047,R23,Variety-21,Variety-21,SourceA,Breeder seed
+142,1000048,R23,Variety-21,Variety-21,SourceA,Breeder seed
+1665,1000263,R24,Variety-22,Variety-22,SourceE,Certified seed
+1666,1000265,R24,Variety-22,Variety-22,SourceE,Certified seed
+59,1000004,R25,Variety-22,Variety-22,SourceC,Breeder seed
+58,1000063,R25,Variety-22,Variety-22,SourceC,Breeder seed
+222,1000151,R26,Variety-22,Variety-22,SourceB,Breeder seed
+227,1000171,R27,Variety-22,Variety-22,SourceD,Certified seed
+228,1000173,R27,Variety-22,Variety-22,SourceD,Certified seed
+147,1000056,R28,Variety-23,Variety-23,SourceA,Breeder seed
+148,1000057,R28,Variety-23,Variety-23,SourceA,Breeder seed
+149,1000058,R29,Variety-24,Variety-24,SourceA,Breeder seed
+150,1000059,R29,Variety-24,Variety-24,SourceA,Breeder seed
+151,1000060,R30,Variety-25,Variety-25,SourceA,Breeder seed
+152,1000061,R30,Variety-25,Variety-25,SourceA,Breeder seed
+153,1000064,R31,Variety-26,Variety-26_a,SourceA,Breeder seed
+154,1000065,R31,Variety-26,Variety-26_a,SourceA,Breeder seed
+235,1000190,R32,Variety-26,Variety-26_b,SourceB,Breeder seed
+236,1000192,R32,Variety-26,Variety-26_b,SourceB,Breeder seed
+44,1000041,R43,Variety-27,Variety-27,SourceA,Breeder seed
+45,1000042,R43,Variety-27,Variety-27,SourceA,Breeder seed
+223,1000153,R44,Variety-27,Variety-27,SourceB,Breeder seed
+224,1000155,R44,Variety-27,Variety-27,SourceB,Breeder seed
+225,1000167,R44,Variety-27,Variety-27,SourceB,Breeder seed
+226,1000169,R44,Variety-27,Variety-27,SourceB,Breeder seed
+1649,1000222,R44,Variety-27,Variety-27,SourceB,Breeder seed
+1650,1000224,R44,Variety-27,Variety-27,SourceB,Breeder seed
+214,1000130,R45,Variety-28,Variety-28,SourceB,Breeder seed
+215,1000132,R45,Variety-28,Variety-28,SourceB,Breeder seed
+1620,1000247,R46,Variety-29,Variety-29,SourceB,Breeder seed
+157,1000067,R47,Variety-30,Variety-30_a,SourceA,Breeder seed
+158,1000068,R47,Variety-30,Variety-30_a,SourceA,Breeder seed
+183,1000091,R48,Variety-30,Variety-30_b,SourceB,Breeder seed
+184,1000092,R48,Variety-30,Variety-30_b,SourceB,Breeder seed
+56,1000003,R49,Variety-31,Variety-31_c,SourceC,Breeder seed
+55,1000055,R49,Variety-31,Variety-31_c,SourceC,Breeder seed
+57,1000062,R49,Variety-31,Variety-31_c,SourceC,Breeder seed
+189,1000099,R49,Variety-31,Variety-31_c,SourceC,Breeder seed
+42,1000002,R50,Variety-31,Variety-31_a,SourceA,Breeder seed
+43,1000040,R50,Variety-31,Variety-31_a,SourceA,Breeder seed
+205,1000113,R51,Variety-31,Variety-31_b,SourceB,Breeder seed
+206,1000114,R51,Variety-31,Variety-31_b,SourceB,Breeder seed
+91,1000095,R52,Variety-32,Variety-32,SourceB,Breeder seed
+92,1000096,R52,Variety-32,Variety-32,SourceB,Breeder seed
+209,1000126,R53,Variety-32,Variety-32,SourceD,Certified seed
+210,1000128,R53,Variety-32,Variety-32,SourceD,Certified seed
+31,1000001,R54,Variety-33,Variety-33,SourceC,Breeder seed
+30,1000030,R54,Variety-33,Variety-33,SourceC,Breeder seed
+32,1000031,R54,Variety-33,Variety-33,SourceC,Breeder seed
+7,1000008,R55,Variety-33,Variety-33,SourceA,Breeder seed
+8,1000009,R55,Variety-33,Variety-33,SourceA,Breeder seed
+85,1000087,R56,Variety-33,Variety-33,SourceB,Breeder seed
+86,1000088,R56,Variety-33,Variety-33,SourceB,Breeder seed
+22,1000022,R57,Variety-34,Variety-34,SourceC,Breeder seed
+23,1000023,R57,Variety-34,Variety-34,SourceC,Breeder seed
+229,1000174,R58,Variety-34,Variety-34,SourceB,Breeder seed
+230,1000176,R58,Variety-34,Variety-34,SourceB,Breeder seed
+231,1000178,R58,Variety-34,Variety-34,SourceB,Breeder seed
+232,1000180,R58,Variety-34,Variety-34,SourceB,Breeder seed
+53,1000053,R59,Variety-35,Variety-35,SourceC,Breeder seed
+54,1000054,R59,Variety-35,Variety-35,SourceC,Breeder seed
+1655,1000239,R59,Variety-35,Variety-35,SourceC,Breeder seed
+1656,1000241,R59,Variety-35,Variety-35,SourceC,Breeder seed
+2,1000005,R60,Variety-36,Variety-36,SourceC,Breeder seed
+51,1000051,R61,Variety-37,Variety-37,SourceC,Breeder seed
+52,1000052,R61,Variety-37,Variety-37,SourceC,Breeder seed
+1663,1000259,R62,Variety-38,Variety-38,SourceE,Certified seed
+1664,1000261,R62,Variety-38,Variety-38,SourceE,Certified seed
+18,1000018,R63,Variety-38,Variety-38,SourceC,Breeder seed
+19,1000019,R63,Variety-38,Variety-38,SourceC,Breeder seed
+1661,1000257,R64,Variety-39,Variety-39,SourceE,Certified seed
+1662,1000258,R64,Variety-39,Variety-39,SourceE,Certified seed
+5,1000006,R65,Variety-39,Variety-39,SourceC,Breeder seed
+6,1000007,R65,Variety-39,Variety-39,SourceC,Breeder seed
+83,1000085,R66,Variety-40,Variety-40,SourceD,Certified seed
+84,1000086,R66,Variety-40,Variety-40,SourceD,Certified seed
+165,1000077,R67,Variety-41,Variety-41,SourceA,Breeder seed
+166,1000078,R67,Variety-41,Variety-41,SourceA,Breeder seed
+1646,1000310,R68,Variety-41,Variety-41,SourceD,Certified seed
+1011,1000701,R69,Variety-42,Variety-42,SourceA,Breeder seed
+1048,1000804,R69,Variety-42,Variety-42,SourceA,Breeder seed
+1352,1000302,R70,Variety-43,Variety-43,SourceA,Breeder seed
+1256,1001012,R70,Variety-43,Variety-43,SourceA,Breeder seed
+422,1000142,F1,None,None,None,None
+453,1000211,F2,None,None,None,None
+460,1000229,F3,None,None,None,None
+447,1000201,F4,None,None,None,None
+418,1000135,F5,None,None,None,None
+747,1000756,F6,None,None,None,None
+440,1000188,F7,None,None,None,None
+469,1000248,F8,None,None,None,None
+457,1000225,F9,None,None,None,None
+420,1000139,F10,None,None,None,None
+444,1000198,F11,None,None,None,None
+432,1000165,F12,None,None,None,None
+409,1000116,F13,None,None,None,None
+435,1000183,F14,None,None,None,None
+448,1000202,F15,None,None,None,None
+427,1000158,F16,None,None,None,None
+433,1000181,F17,None,None,None,None
+454,1000212,F18,None,None,None,None
+458,1000226,F19,None,None,None,None
+426,1000157,F20,None,None,None,None
+468,1000246,F21,None,None,None,None
+436,1000185,F22,None,None,None,None
+617,1000395,F23,None,None,None,None
+608,1000360,F24,None,None,None,None
+456,1000214,F25,None,None,None,None
+424,1000145,F26,None,None,None,None
+624,1000405,F27,None,None,None,None
+401,1000100,F28,None,None,None,None
+642,1000473,F29,None,None,None,None
+603,1000350,F30,None,None,None,None
+630,1000427,F31,None,None,None,None
+655,1000504,F32,None,None,None,None
+438,1000186,F33,None,None,None,None
+635,1000448,F34,None,None,None,None
+408,1000110,F35,None,None,None,None
+411,1000117,F36,None,None,None,None
+417,1000133,F37,None,None,None,None
+405,1000106,F38,None,None,None,None
+404,1000104,F39,None,None,None,None
+745,1000752,F40,None,None,None,None
+632,1000431,F41,None,None,None,None
+643,1000474,F42,None,None,None,None
+640,1000458,F43,None,None,None,None
+631,1000429,F44,None,None,None,None
+402,1000102,F45,None,None,None,None
+615,1000379,F46,None,None,None,None
+647,1000481,F47,None,None,None,None
+618,1000397,F48,None,None,None,None
+746,1000754,F49,None,None,None,None
+419,1000137,F50,None,None,None,None
+601,1000346,F51,None,None,None,None
+654,1000502,F52,None,None,None,None
+685,1000595,F53,None,None,None,None
+1148,1000988,F54,None,None,None,None
+604,1000352,F55,None,None,None,None
+637,1000452,F56,None,None,None,None
+641,1000471,F57,None,None,None,None
+622,1000401,F58,None,None,None,None
+597,1000329,F59,None,None,None,None
+633,1000444,F60,None,None,None,None
+616,1000381,F61,None,None,None,None
+639,1000456,F62,None,None,None,None
+657,1000518,F63,None,None,None,None
+739,1000732,F64,None,None,None,None
+629,1000425,F65,None,None,None,None
+609,1000370,F66,None,None,None,None
+738,1000731,F67,None,None,None,None
+431,1000164,F68,None,None,None,None
+446,1000200,F69,None,None,None,None
+741,1000734,F70,None,None,None,None
+660,1000521,F71,None,None,None,None
+683,1000593,F72,None,None,None,None
+743,1000738,F73,None,None,None,None
+742,1000736,F74,None,None,None,None
+484,1000289,F75,None,None,None,None
+589,1000588,F76,None,None,None,None
+542,1000439,F77,None,None,None,None
+677,1000575,F78,None,None,None,None
+596,1000328,F79,None,None,None,None
+602,1000348,F80,None,None,None,None
+651,1000497,F81,None,None,None,None
+625,1000418,F82,None,None,None,None
+613,1000376,F83,None,None,None,None
+620,1000399,F84,None,None,None,None
+645,1000477,F85,None,None,None,None
+646,1000479,F86,None,None,None,None
+650,1000495,F87,None,None,None,None
+652,1000499,F88,None,None,None,None
+614,1000377,F89,None,None,None,None
+610,1000371,F90,None,None,None,None
+605,1000354,F91,None,None,None,None
+634,1000446,F92,None,None,None,None
+626,1000419,F93,None,None,None,None
+544,1000442,F94,None,None,None,None
+473,1000266,F95,None,None,None,None
+493,1000308,F96,None,None,None,None
+478,1000276,F97,None,None,None,None
+519,1000367,F98,None,None,None,None
+497,1000316,F99,None,None,None,None
+749,1000759,F100,None,None,None,None
+751,1000763,F101,None,None,None,None
+811,1000675,F102,None,None,None,None
+527,1000392,F103,None,None,None,None
+679,1000578,F104,None,None,None,None
+582,1000562,F105,None,None,None,None
+557,1000489,F106,None,None,None,None
+672,1000551,F107,None,None,None,None
+533,1000414,F108,None,None,None,None
+663,1000527,F109,None,None,None,None
+499,1000317,F110,None,None,None,None
+558,1000491,F111,None,None,None,None
+560,1000492,F112,None,None,None,None
+895,1000628,F113,None,None,None,None
+537,1000433,F114,None,None,None,None
+553,1000482,F115,None,None,None,None
+671,1000549,F116,None,None,None,None
+583,1000564,F117,None,None,None,None
+680,1000579,F118,None,None,None,None
+664,1000529,F119,None,None,None,None
+521,1000383,F120,None,None,None,None
+674,1000569,F121,None,None,None,None
+547,1000463,F122,None,None,None,None
+588,1000586,F123,None,None,None,None
+786,1000609,F124,None,None,None,None
+816,1000685,F125,None,None,None,None
+551,1000469,F126,None,None,None,None
+488,1000295,F127,None,None,None,None
+584,1000566,F128,None,None,None,None
+810,1000673,F129,None,None,None,None
+492,1000306,F130,None,None,None,None
+565,1000511,F131,None,None,None,None
+503,1000321,F132,None,None,None,None
+532,1000412,F133,None,None,None,None
+545,1000460,F134,None,None,None,None
+812,1000677,F135,None,None,None,None
+598,1000331,F136,None,None,None,None
+788,1000612,F137,None,None,None,None
+520,1000368,F138,None,None,None,None
+477,1000274,F139,None,None,None,None
+831,1000728,F140,None,None,None,None
+790,1000615,F141,None,None,None,None
+826,1000720,F142,None,None,None,None
+512,1000344,F143,None,None,None,None
+508,1000338,F144,None,None,None,None
+525,1000388,F145,None,None,None,None
+515,1000363,F146,None,None,None,None
+568,1000516,F147,None,None,None,None
+561,1000507,F148,None,None,None,None
+513,1000361,F149,None,None,None,None
+472,1000252,F150,None,None,None,None
+586,1000582,F151,None,None,None,None
+474,1000268,F152,None,None,None,None
+546,1000462,F153,None,None,None,None
+526,1000390,F154,None,None,None,None
+517,1000365,F155,None,None,None,None
+835,1000742,F156,None,None,None,None
+827,1000722,F157,None,None,None,None
+817,1000699,F158,None,None,None,None
+548,1000465,F159,None,None,None,None
+823,1000706,F160,None,None,None,None
+830,1000726,F161,None,None,None,None
+791,1000617,F162,None,None,None,None
+813,1000679,F163,None,None,None,None
+809,1000671,F164,None,None,None,None
+814,1000681,F165,None,None,None,None
+531,1000410,F166,None,None,None,None
+796,1000636,F167,None,None,None,None
+815,1000683,F168,None,None,None,None
+522,1000385,F169,None,None,None,None
+673,1000568,F170,None,None,None,None
+540,1000437,F171,None,None,None,None
+675,1000571,F172,None,None,None,None
+667,1000543,F173,None,None,None,None
+570,1000531,F174,None,None,None,None
+794,1000633,F175,None,None,None,None
+795,1000634,F176,None,None,None,None
+509,1000340,F177,None,None,None,None
+562,1000508,F178,None,None,None,None
+836,1000743,F179,None,None,None,None
+541,1000438,F180,None,None,None,None
+481,1000284,F181,None,None,None,None
+661,1000523,F182,None,None,None,None
+573,1000535,F183,None,None,None,None
+529,1000407,F184,None,None,None,None
+507,1000337,F185,None,None,None,None
+580,1000558,F186,None,None,None,None
+555,1000486,F187,None,None,None,None
+572,1000534,F188,None,None,None,None
+504,1000323,F189,None,None,None,None
+566,1000513,F190,None,None,None,None
+670,1000547,F191,None,None,None,None
+578,1000554,F192,None,None,None,None
+797,1000638,F193,None,None,None,None
+662,1000525,F194,None,None,None,None
+475,1000270,F195,None,None,None,None
+587,1000584,F196,None,None,None,None
+487,1000293,F197,None,None,None,None
+806,1000658,F198,None,None,None,None
+500,1000318,F199,None,None,None,None
+668,1000545,F200,None,None,None,None
+579,1000556,F201,None,None,None,None
+678,1000576,F202,None,None,None,None
+581,1000560,F203,None,None,None,None
+575,1000536,F204,None,None,None,None
+666,1000541,F205,None,None,None,None
+681,1000590,F206,None,None,None,None
+482,1000286,F207,None,None,None,None
+483,1000287,F208,None,None,None,None
+490,1000304,F209,None,None,None,None
+676,1000573,F210,None,None,None,None
+539,1000435,F211,None,None,None,None
+571,1000533,F212,None,None,None,None
+576,1000538,F213,None,None,None,None
+802,1000653,F214,None,None,None,None
+567,1000514,F215,None,None,None,None
+793,1000631,F216,None,None,None,None
+787,1000610,F217,None,None,None,None
+476,1000272,F218,None,None,None,None
+528,1000393,F219,None,None,None,None
+720,1000669,F220,None,None,None,None
+698,1000621,F221,None,None,None,None
+709,1000646,F222,None,None,None,None
+724,1000690,F223,None,None,None,None
+717,1000665,F224,None,None,None,None
+711,1000648,F225,None,None,None,None
+693,1000602,F226,None,None,None,None
+690,1000598,F227,None,None,None,None
+718,1000667,F228,None,None,None,None
+722,1000687,F229,None,None,None,None
+707,1000645,F230,None,None,None,None
+712,1000650,F231,None,None,None,None
+703,1000627,F232,None,None,None,None
+701,1000625,F233,None,None,None,None
+704,1000629,F234,None,None,None,None
+726,1000693,F235,None,None,None,None
+903,1000649,F236,None,None,None,None
+1419,1000485,F237,None,None,None,None
+909,1000666,F238,None,None,None,None
+1638,1000292,F239,None,None,None,None
+1446,1000561,F240,None,None,None,None
+1627,1000271,F241,None,None,None,None
+1445,1000559,F242,None,None,None,None
+1393,1000406,F243,None,None,None,None
+1448,1000565,F244,None,None,None,None
+891,1000623,F245,None,None,None,None
+1153,1000999,F246,None,None,None,None
+1155,1001001,F247,None,None,None,None
+1633,1000285,F248,None,None,None,None
+1444,1000557,F249,None,None,None,None
+1636,1000290,F250,None,None,None,None
+1451,1000583,F251,None,None,None,None
+1370,1000335,F252,None,None,None,None
+1330,1000255,F253,None,None,None,None
+1581,1000162,F254,None,None,None,None
+1355,1000311,F255,None,None,None,None
+1274,1000127,F256,None,None,None,None
+1254,1001011,F257,None,None,None,None
+1233,1000983,F258,None,None,None,None
+1308,1000207,F259,None,None,None,None
+1266,1000111,F260,None,None,None,None
+1295,1000177,F261,None,None,None,None
+1375,1000342,F262,None,None,None,None
+1302,1000194,F263,None,None,None,None
+1238,1000985,F264,None,None,None,None
+1250,1001007,F265,None,None,None,None
+1631,1000278,F266,None,None,None,None
+1635,1000288,F267,None,None,None,None
+1158,1001004,F268,None,None,None,None
+736,1000717,F269,None,None,None,None
+1629,1000275,F270,None,None,None,None
+887,1000606,F271,None,None,None,None
+1211,1000949,F272,None,None,None,None
+732,1000712,F273,None,None,None,None
+1453,1000587,F274,None,None,None,None
+1154,1001000,F275,None,None,None,None
+885,1000603,F276,None,None,None,None
+1179,1000898,F277,None,None,None,None
+834,1000740,F278,None,None,None,None
+1182,1000900,F279,None,None,None,None
+1344,1000283,F280,None,None,None,None
+1376,1000343,F281,None,None,None,None
+1306,1000205,F282,None,None,None,None
+728,1000697,F283,None,None,None,None
+1324,1000238,F284,None,None,None,None
+1318,1000220,F285,None,None,None,None
+1296,1000179,F286,None,None,None,None
+1452,1000585,F287,None,None,None,None
+1379,1000362,F288,None,None,None,None
+1385,1000382,F289,None,None,None,None
+735,1000716,F290,None,None,None,None
+733,1000714,F291,None,None,None,None
+1348,1000299,F292,None,None,None,None
+1628,1000273,F293,None,None,None,None
+1301,1000193,F294,None,None,None,None
+1323,1000237,F295,None,None,None,None
+1231,1000975,F296,None,None,None,None
+1442,1000553,F297,None,None,None,None
+1639,1000294,F298,None,None,None,None
+1159,1001005,F299,None,None,None,None
+1632,1000279,F300,None,None,None,None
+1625,1000267,F301,None,None,None,None
+1388,1000386,F302,None,None,None,None
+1326,1000240,F303,None,None,None,None
+1242,1000992,F304,None,None,None,None
+1290,1000168,F305,None,None,None,None
+1331,1000256,F306,None,None,None,None
+1171,1000887,F307,None,None,None,None
+1253,1001010,F308,None,None,None,None
+1449,1000580,F309,None,None,None,None
+1630,1000277,F310,None,None,None,None
+1626,1000269,F311,None,None,None,None
+1237,1000984,F312,None,None,None,None
+1350,1000301,F313,None,None,None,None
+1358,1000314,F314,None,None,None,None
+1279,1000131,F315,None,None,None,None
+1368,1000322,F316,None,None,None,None
+1055,1000829,F317,None,None,None,None
+1246,1000996,F318,None,None,None,None
+1041,1000792,F319,None,None,None,None
+1361,1000315,F320,None,None,None,None
+1260,1001017,F321,None,None,None,None
+1317,1000219,F322,None,None,None,None
+1349,1000300,F323,None,None,None,None
+1058,1000848,F324,None,None,None,None
+1034,1000769,F325,None,None,None,None
+952,1000790,F326,None,None,None,None
+1383,1000366,F327,None,None,None,None
+1252,1001009,F328,None,None,None,None
+1178,1000897,F329,None,None,None,None
+1262,1001019,F330,None,None,None,None
+1313,1000215,F331,None,None,None,None
+1287,1000152,F332,None,None,None,None
+1307,1000206,F333,None,None,None,None
+1248,1000998,F334,None,None,None,None
+1342,1000282,F335,None,None,None,None
+940,1000758,F336,None,None,None,None
+946,1000783,F337,None,None,None,None
+1040,1000781,F338,None,None,None,None
+1273,1000125,F339,None,None,None,None
+1371,1000336,F340,None,None,None,None
+852,1000797,F341,None,None,None,None
+1289,1000166,F342,None,None,None,None
+847,1000778,F343,None,None,None,None
+924,1000713,F344,None,None,None,None
+1054,1000827,F345,None,None,None,None
+1059,1000850,F346,None,None,None,None
+1081,1000892,F347,None,None,None,None
+851,1000795,F348,None,None,None,None
+849,1000791,F349,None,None,None,None
+850,1000793,F350,None,None,None,None
+1131,1000968,F351,None,None,None,None
+1247,1000997,F352,None,None,None,None
+766,1000812,F353,None,None,None,None
+855,1000802,F354,None,None,None,None
+1356,1000312,F355,None,None,None,None
+1137,1000976,F356,None,None,None,None
+1341,1000281,F357,None,None,None,None
+980,1000613,F358,None,None,None,None
+1224,1000966,F359,None,None,None,None
+1039,1000779,F360,None,None,None,None
+984,1000619,F361,None,None,None,None
+1079,1000884,F362,None,None,None,None
+991,1000641,F363,None,None,None,None
+1196,1000923,F364,None,None,None,None
+1373,1000339,F365,None,None,None,None
+770,1000834,F366,None,None,None,None
+1091,1000905,F367,None,None,None,None
+782,1000869,F368,None,None,None,None
+1510,1000478,F369,None,None,None,None
+1389,1000387,F370,None,None,None,None
+1523,1000519,F371,None,None,None,None
+1105,1000928,F372,None,None,None,None
+774,1000839,F373,None,None,None,None
+1099,1000917,F374,None,None,None,None
+1161,1001013,F375,None,None,None,None
+1135,1000971,F376,None,None,None,None
+1085,1000894,F377,None,None,None,None
+781,1000867,F378,None,None,None,None
+752,1000765,F379,None,None,None,None
+753,1000782,F380,None,None,None,None
+1127,1000959,F381,None,None,None,None
+1134,1000970,F382,None,None,None,None
+1030,1000748,F383,None,None,None,None
+1408,1000441,F384,None,None,None,None
+1119,1000945,F385,None,None,None,None
+996,1000656,F386,None,None,None,None
+1185,1000910,F387,None,None,None,None
+1397,1000413,F388,None,None,None,None
+1141,1000979,F389,None,None,None,None
+959,1000815,F390,None,None,None,None
+777,1000859,F391,None,None,None,None
+1432,1000515,F392,None,None,None,None
+1076,1000881,F393,None,None,None,None
+1092,1000906,F394,None,None,None,None
+1425,1000506,F395,None,None,None,None
+1108,1000931,F396,None,None,None,None
+1240,1000986,F397,None,None,None,None
+1534,1000546,F398,None,None,None,None
+1504,1000457,F399,None,None,None,None
+1021,1000725,F400,None,None,None,None
+1404,1000436,F401,None,None,None,None
+1540,1000572,F402,None,None,None,None
+1531,1000542,F403,None,None,None,None
+776,1000843,F404,None,None,None,None
+955,1000808,F405,None,None,None,None
+1112,1000934,F406,None,None,None,None
+967,1000842,F407,None,None,None,None
+1201,1000935,F408,None,None,None,None
+947,1000784,F409,None,None,None,None
+1066,1000872,F410,None,None,None,None
+1150,1000989,F411,None,None,None,None
+1024,1000730,F412,None,None,None,None
+1036,1000773,F413,None,None,None,None
+1221,1000964,F414,None,None,None,None
+1498,1000445,F415,None,None,None,None
+1046,1000801,F416,None,None,None,None
+1528,1000528,F417,None,None,None,None
+1336,1000264,F418,None,None,None,None
+988,1000637,F419,None,None,None,None
+1193,1000920,F420,None,None,None,None
+1136,1000972,F421,None,None,None,None
+1062,1000856,F422,None,None,None,None
+934,1000737,F423,None,None,None,None
+921,1000710,F424,None,None,None,None
+1088,1000895,F425,None,None,None,None
+1220,1000963,F426,None,None,None,None
+1440,1000537,F427,None,None,None,None
+1057,1000846,F428,None,None,None,None
+759,1000787,F429,None,None,None,None
+763,1000807,F430,None,None,None,None
+954,1000806,F431,None,None,None,None
+993,1000652,F432,None,None,None,None
+1217,1000960,F433,None,None,None,None
+1094,1000908,F434,None,None,None,None
+989,1000639,F435,None,None,None,None
+1184,1000902,F436,None,None,None,None
+1069,1000877,F437,None,None,None,None
+1509,1000476,F438,None,None,None,None
+1569,1000134,F439,None,None,None,None
+990,1000640,F440,None,None,None,None
+1187,1000912,F441,None,None,None,None
+979,1000611,F442,None,None,None,None
+1216,1000953,F443,None,None,None,None
+1320,1000223,F444,None,None,None,None
+1418,1000483,F445,None,None,None,None
+1539,1000570,F446,None,None,None,None
+1515,1000496,F447,None,None,None,None
+1556,1000105,F448,None,None,None,None
+1550,1000596,F449,None,None,None,None
+1502,1000453,F450,None,None,None,None
+1610,1000227,F451,None,None,None,None
+1567,1000122,F452,None,None,None,None
+1511,1000480,F453,None,None,None,None
+1527,1000526,F454,None,None,None,None
+1496,1000430,F455,None,None,None,None
+1172,1000888,F456,None,None,None,None
+1559,1000109,F457,None,None,None,None
+1529,1000539,F458,None,None,None,None
+1497,1000443,F459,None,None,None,None
+981,1000614,F460,None,None,None,None
+1210,1000948,F461,None,None,None,None
+992,1000642,F462,None,None,None,None
+1205,1000938,F463,None,None,None,None
+1571,1000138,F464,None,None,None,None
+1558,1000108,F465,None,None,None,None
+987,1000635,F466,None,None,None,None
+1493,1000424,F467,None,None,None,None
+1300,1000191,F468,None,None,None,None
+1243,1000993,F469,None,None,None,None
+912,1000670,F470,None,None,None,None
+1421,1000488,F471,None,None,None,None
+1415,1000468,F472,None,None,None,None
+1412,1000464,F473,None,None,None,None
+1286,1000150,F474,None,None,None,None
+1386,1000384,F475,None,None,None,None
+1126,1000958,F476,None,None,None,None
+1002,1000674,F477,None,None,None,None
+1245,1000995,F478,None,None,None,None
+1329,1000254,F479,None,None,None,None
+1089,1000903,F480,None,None,None,None
+773,1000838,F481,None,None,None,None
+1305,1000204,F482,None,None,None,None
+778,1000861,F483,None,None,None,None
+1285,1000149,F484,None,None,None,None
+1151,1000990,F485,None,None,None,None
+1006,1000682,F486,None,None,None,None
+1122,1000955,F487,None,None,None,None
+1078,1000883,F488,None,None,None,None
+1429,1000510,F489,None,None,None,None
+1145,1000987,F490,None,None,None,None
+1394,1000408,F491,None,None,None,None
+1004,1000678,F492,None,None,None,None
+1110,1000933,F493,None,None,None,None
+764,1000809,F494,None,None,None,None
+1093,1000907,F495,None,None,None,None
+1422,1000490,F496,None,None,None,None
+1402,1000434,F497,None,None,None,None
+982,1000616,F498,None,None,None,None
+1229,1000974,F499,None,None,None,None
+1503,1000455,F500,None,None,None,None
+1017,1000719,F501,None,None,None,None
+1023,1000729,F502,None,None,None,None
+878,1000878,F503,None,None,None,None
+846,1000776,F504,None,None,None,None
+1447,1000563,F505,None,None,None,None
+845,1000774,F506,None,None,None,None
+775,1000841,F507,None,None,None,None
+1073,1000879,F508,None,None,None,None
+1033,1000767,F509,None,None,None,None
+1115,1000942,F510,None,None,None,None
+870,1000855,F511,None,None,None,None
+1005,1000680,F512,None,None,None,None
+765,1000810,F513,None,None,None,None
+1015,1000707,F514,None,None,None,None
+1395,1000409,F515,None,None,None,None
+1080,1000885,F516,None,None,None,None
+1118,1000944,F517,None,None,None,None
+843,1000770,F518,None,None,None,None
+856,1000803,F519,None,None,None,None
+1398,1000415,F520,None,None,None,None
+859,1000821,F521,None,None,None,None
+1144,1000982,F522,None,None,None,None
+1032,1000751,F523,None,None,None,None
+1410,1000461,F524,None,None,None,None
+1120,1000946,F525,None,None,None,None
+1074,1000880,F526,None,None,None,None
+1124,1000957,F527,None,None,None,None
+1130,1000967,F528,None,None,None,None
+1007,1000684,F529,None,None,None,None
+1473,1000369,F530,None,None,None,None
+1435,1000532,F531,None,None,None,None
+971,1000864,F532,None,None,None,None
+995,1000655,F533,None,None,None,None
+1218,1000961,F534,None,None,None,None
+1020,1000724,F535,None,None,None,None
+769,1000832,F536,None,None,None,None
+1175,1000891,F537,None,None,None,None
+1104,1000919,F538,None,None,None,None
+779,1000863,F539,None,None,None,None
+1107,1000930,F540,None,None,None,None
+868,1000851,F541,None,None,None,None
+1090,1000904,F542,None,None,None,None
+871,1000857,F543,None,None,None,None
+1095,1000909,F544,None,None,None,None
+873,1000870,F545,None,None,None,None
+1031,1000750,F546,None,None,None,None
+892,1000624,F547,None,None,None,None
+970,1000862,F548,None,None,None,None
+906,1000664,F549,None,None,None,None
+904,1000651,F550,None,None,None,None
+997,1000657,F551,None,None,None,None
+1190,1000914,F552,None,None,None,None
+894,1000626,F553,None,None,None,None
+966,1000840,F554,None,None,None,None
+1060,1000852,F555,None,None,None,None
+1206,1000939,F556,None,None,None,None
+972,1000866,F557,None,None,None,None
+914,1000688,F558,None,None,None,None
+1026,1000741,F559,None,None,None,None
+1430,1000512,F560,None,None,None,None
+1050,1000820,F561,None,None,None,None
+1049,1000818,F562,None,None,None,None
+1053,1000826,F563,None,None,None,None
+1142,1000980,F564,None,None,None,None
+1044,1000798,F565,None,None,None,None
+1045,1000800,F566,None,None,None,None
+1106,1000929,F567,None,None,None,None
+1037,1000775,F568,None,None,None,None
+1051,1000822,F569,None,None,None,None
+939,1000757,F570,None,None,None,None
+758,1000785,F571,None,None,None,None
+1101,1000918,F572,None,None,None,None
+1097,1000915,F573,None,None,None,None
+1114,1000941,F574,None,None,None,None
+1202,1000936,F575,None,None,None,None
+1465,1000345,F576,None,None,None,None
+1199,1000926,F577,None,None,None,None
+1109,1000932,F578,None,None,None,None
+1123,1000956,F579,None,None,None,None
+1068,1000875,F580,None,None,None,None
+1251,1001008,F581,None,None,None,None
+1335,1000262,F582,None,None,None,None
+1291,1000170,F583,None,None,None,None
+1272,1000115,F584,None,None,None,None
+1374,1000341,F585,None,None,None,None
+1315,1000217,F586,None,None,None,None
+1337,1000280,F587,None,None,None,None
+1357,1000313,F588,None,None,None,None
+1261,1001018,F589,None,None,None,None
+1365,1000319,F590,None,None,None,None
+1284,1000147,F591,None,None,None,None
+1334,1000260,F592,None,None,None,None
+1244,1000994,F593,None,None,None,None
+1319,1000221,F594,None,None,None,None
+1278,1000129,F595,None,None,None,None
+1294,1000175,F596,None,None,None,None
+1169,1000886,F597,None,None,None,None
+1268,1000112,F598,None,None,None,None
+1259,1001016,F599,None,None,None,None
+1152,1000991,F600,None,None,None,None
+905,1000663,F601,None,None,None,None
+1346,1000298,F602,None,None,None,None
+1018,1000721,F603,None,None,None,None
+1282,1000146,F604,None,None,None,None
+973,1000868,F605,None,None,None,None
+884,1000601,F606,None,None,None,None
+1209,1000947,F607,None,None,None,None
+883,1000600,F608,None,None,None,None
+1186,1000911,F609,None,None,None,None
+1322,1000236,F610,None,None,None,None
+1288,1000154,F611,None,None,None,None
+1156,1001002,F612,None,None,None,None
+888,1000607,F613,None,None,None,None
+1165,1001015,F614,None,None,None,None
+761,1000805,F615,None,None,None,None
+1420,1000487,F616,None,None,None,None
+1292,1000172,F617,None,None,None,None
+1390,1000389,F618,None,None,None,None
+985,1000632,F619,None,None,None,None
+983,1000618,F620,None,None,None,None
+1200,1000927,F621,None,None,None,None
+848,1000780,F622,None,None,None,None
+864,1000830,F623,None,None,None,None
+1570,1000136,F624,None,None,None,None
+1568,1000124,F625,None,None,None,None
+1494,1000426,F626,None,None,None,None
+1516,1000498,F627,None,None,None,None
+977,1000608,F628,None,None,None,None
+1173,1000889,F629,None,None,None,None
+1139,1000978,F630,None,None,None,None
+1098,1000916,F631,None,None,None,None
+1514,1000494,F632,None,None,None,None
+1472,1000359,F633,None,None,None,None
+1480,1000380,F634,None,None,None,None
+1468,1000351,F635,None,None,None,None
+1479,1000378,F636,None,None,None,None
+780,1000865,F637,None,None,None,None
+1226,1000973,F638,None,None,None,None
+1043,1000796,F639,None,None,None,None
+767,1000814,F640,None,None,None,None
+1207,1000940,F641,None,None,None,None
+902,1000647,F642,None,None,None,None
+933,1000735,F643,None,None,None,None
+957,1000811,F644,None,None,None,None
+942,1000762,F645,None,None,None,None
+889,1000620,F646,None,None,None,None
+922,1000711,F647,None,None,None,None
+1391,1000391,F648,None,None,None,None
+886,1000605,F649,None,None,None,None
+951,1000788,F650,None,None,None,None
+1065,1000871,F651,None,None,None,None
+1369,1000334,F652,None,None,None,None
+910,1000668,F653,None,None,None,None
+919,1000696,F654,None,None,None,None
+928,1000718,F655,None,None,None,None
+890,1000622,F656,None,None,None,None
+1212,1000950,F657,None,None,None,None
+1143,1000981,F658,None,None,None,None
+1067,1000873,F659,None,None,None,None
+881,1000597,F660,None,None,None,None
+1197,1000924,F661,None,None,None,None
+950,1000786,F662,None,None,None,None
+1458,1000326,F663,None,None,None,None
+1009,1000700,F664,None,None,None,None
+932,1000733,F665,None,None,None,None
+926,1000715,F666,None,None,None,None
+1084,1000893,F667,None,None,None,None
+1042,1000794,F668,None,None,None,None
+760,1000789,F669,None,None,None,None
+1413,1000466,F670,None,None,None,None
+1222,1000965,F671,None,None,None,None
+968,1000844,F672,None,None,None,None
+882,1000599,F673,None,None,None,None
+1203,1000937,F674,None,None,None,None
+943,1000764,F675,None,None,None,None
+917,1000692,F676,None,None,None,None
+1177,1000896,F677,None,None,None,None
+1019,1000723,F678,None,None,None,None
+1012,1000703,F679,None,None,None,None
+937,1000753,F680,None,None,None,None
+1219,1000962,F681,None,None,None,None
+1464,1000332,F682,None,None,None,None
+1443,1000555,F683,None,None,None,None
+1001,1000672,F684,None,None,None,None
+1469,1000353,F685,None,None,None,None
+1476,1000373,F686,None,None,None,None
+1457,1000324,F687,None,None,None,None
+1056,1000831,F688,None,None,None,None
+1459,1000327,F689,None,None,None,None
+1466,1000347,F690,None,None,None,None
+941,1000760,F691,None,None,None,None
+1038,1000777,F692,None,None,None,None
+1061,1000854,F693,None,None,None,None
+1003,1000676,F694,None,None,None,None
+918,1000694,F695,None,None,None,None
+1213,1000951,F696,None,None,None,None
+1014,1000705,F697,None,None,None,None
+1399,1000416,F698,None,None,None,None
+961,1000833,F699,None,None,None,None
+1433,1000530,F700,None,None,None,None
+963,1000836,F701,None,None,None,None
+960,1000816,F702,None,None,None,None
+896,1000630,F703,None,None,None,None
+1195,1000922,F704,None,None,None,None
+958,1000813,F705,None,None,None,None
+1553,1000101,F706,None,None,None,None
+920,1000698,F707,None,None,None,None
+1189,1000913,F708,None,None,None,None
+1519,1000503,F709,None,None,None,None
+1525,1000522,F710,None,None,None,None
+998,1000659,F711,None,None,None,None
+1194,1000921,F712,None,None,None,None
+861,1000825,F713,None,None,None,None
+1489,1000417,F714,None,None,None,None
+839,1000749,F715,None,None,None,None
+869,1000853,F716,None,None,None,None
+865,1000845,F717,None,None,None,None
+1477,1000375,F718,None,None,None,None
+1564,1000119,F719,None,None,None,None
+1495,1000428,F720,None,None,None,None
+1555,1000103,F721,None,None,None,None
+1524,1000520,F722,None,None,None,None
+1535,1000548,F723,None,None,None,None
+1572,1000140,F724,None,None,None,None
+1492,1000422,F725,None,None,None,None
+1520,1000505,F726,None,None,None,None
+1513,1000493,F727,None,None,None,None
+1508,1000475,F728,None,None,None,None
+1575,1000144,F729,None,None,None,None
+1506,1000472,F730,None,None,None,None
+1541,1000574,F731,None,None,None,None
+1532,1000544,F732,None,None,None,None
+1563,1000118,F733,None,None,None,None
+1521,1000517,F734,None,None,None,None
+1549,1000594,F735,None,None,None,None
+1499,1000447,F736,None,None,None,None
+1537,1000567,F737,None,None,None,None
+1536,1000550,F738,None,None,None,None
+1543,1000577,F739,None,None,None,None
+1501,1000451,F740,None,None,None,None
+1526,1000524,F741,None,None,None,None
+1546,1000591,F742,None,None,None,None
+1566,1000121,F743,None,None,None,None
+866,1000847,F744,None,None,None,None
+876,1000874,F745,None,None,None,None
+858,1000819,F746,None,None,None,None
+872,1000858,F747,None,None,None,None
+867,1000849,F748,None,None,None,None
+853,1000799,F749,None,None,None,None
+877,1000876,F750,None,None,None,None
+860,1000823,F751,None,None,None,None
+837,1000745,F752,None,None,None,None
+842,1000768,F753,None,None,None,None
+841,1000766,F754,None,None,None,None
+1467,1000349,F755,None,None,None,None
+1481,1000394,F756,None,None,None,None
+1482,1000396,F757,None,None,None,None
+1600,1000203,F758,None,None,None,None
+1491,1000420,F759,None,None,None,None
+1471,1000357,F760,None,None,None,None
+1462,1000330,F761,None,None,None,None
+1470,1000355,F762,None,None,None,None
+1401,1000432,F763,None,None,None,None
+844,1000772,F764,None,None,None,None
+1396,1000411,F765,None,None,None,None
+863,1000828,F766,None,None,None,None
+1016,1000708,F767,None,None,None,None
+1485,1000400,F768,None,None,None,None
+1035,1000771,F769,None,None,None,None
+1183,1000901,F770,None,None,None,None
+1484,1000398,F771,None,None,None,None
+916,1000691,F772,None,None,None,None
+1198,1000925,F773,None,None,None,None
+1487,1000402,F774,None,None,None,None
+1174,1000890,F775,None,None,None,None
+1157,1001003,F776,None,None,None,None
+1162,1001014,F777,None,None,None,None
+1022,1000727,F778,None,None,None,None
+913,1000686,F779,None,None,None,None
+1052,1000824,F780,None,None,None,None
+898,1000644,F781,None,None,None,None
+897,1000643,F782,None,None,None,None
+1215,1000952,F783,None,None,None,None
+1580,1000160,F784,None,None,None,None
+1594,1000196,F785,None,None,None,None
+1592,1000189,F786,None,None,None,None
+406,1000107,F787,None,None,None,None
+430,1000163,F788,None,None,None,None
+1475,1000372,F789,None,None,None,None
+1488,1000404,F790,None,None,None,None
+1500,1000449,F791,None,None,None,None
+1517,1000500,F792,None,None,None,None
+1545,1000589,F793,None,None,None,None
+1547,1000592,F794,None,None,None,None
+434,1000182,F795,None,None,None,None
+1587,1000184,F796,None,None,None,None
+1637,1000291,F797,None,None,None,None
+439,1000187,F798,None,None,None,None
+442,1000195,F799,None,None,None,None
+443,1000197,F800,None,None,None,None
+445,1000199,F801,None,None,None,None
+449,1000208,F802,None,None,None,None
+451,1000209,F803,None,None,None,None
+452,1000210,F804,None,None,None,None
+455,1000213,F805,None,None,None,None
+459,1000228,F806,None,None,None,None
+461,1000230,F807,None,None,None,None
+462,1000232,F808,None,None,None,None
+464,1000234,F809,None,None,None,None
+465,1000242,F810,None,None,None,None
+466,1000243,F811,None,None,None,None
+467,1000244,F812,None,None,None,None
+470,1000249,F813,None,None,None,None
+494,1000309,F814,None,None,None,None
+413,1000120,F815,None,None,None,None
+502,1000320,F816,None,None,None,None
+554,1000484,F817,None,None,None,None
+563,1000509,F818,None,None,None,None
+577,1000552,F819,None,None,None,None
+585,1000581,F820,None,None,None,None
+593,1000325,F821,None,None,None,None
+600,1000333,F822,None,None,None,None
+606,1000356,F823,None,None,None,None
+607,1000358,F824,None,None,None,None
+416,1000123,F825,None,None,None,None
+612,1000374,F826,None,None,None,None
+623,1000403,F827,None,None,None,None
+627,1000421,F828,None,None,None,None
+628,1000423,F829,None,None,None,None
+636,1000450,F830,None,None,None,None
+638,1000454,F831,None,None,None,None
+653,1000501,F832,None,None,None,None
+665,1000540,F833,None,None,None,None
+421,1000141,F834,None,None,None,None
+694,1000604,F835,None,None,None,None
+723,1000689,F836,None,None,None,None
+727,1000695,F837,None,None,None,None
+729,1000709,F838,None,None,None,None
+750,1000761,F839,None,None,None,None
+771,1000835,F840,None,None,None,None
+772,1000837,F841,None,None,None,None
+803,1000654,F842,None,None,None,None
+423,1000143,F843,None,None,None,None
+807,1000660,F844,None,None,None,None
+808,1000662,F845,None,None,None,None
+820,1000702,F846,None,None,None,None
+821,1000704,F847,None,None,None,None
+838,1000747,F848,None,None,None,None
+857,1000817,F849,None,None,None,None
+425,1000156,F850,None,None,None,None
+935,1000739,F851,None,None,None,None
+938,1000755,F852,None,None,None,None
+969,1000860,F853,None,None,None,None
+1028,1000744,F854,None,None,None,None
+1029,1000746,F855,None,None,None,None
+1077,1000882,F856,None,None,None,None
+428,1000159,F857,None,None,None,None
+1116,1000943,F858,None,None,None,None
+1121,1000954,F859,None,None,None,None
+1132,1000969,F860,None,None,None,None
+1138,1000977,F861,None,None,None,None
+1160,1001006,F862,None,None,None,None
+1181,1000899,F863,None,None,None,None
+429,1000161,F864,None,None,None,None
+1345,1000297,F865,None,None,None,None
+1380,1000364,F866,None,None,None,None
+1407,1000440,F867,None,None,None,None
+1409,1000459,F868,None,None,None,None
+1414,1000467,F869,None,None,None,None
+1416,1000470,F870,None,None,None,None
+1613,1000231,F871,None,None,None,None
+252,1000218,F872,None,None,None,None
+999,1000661,F873,None,None,None,None
+250,1000216,F874,None,None,None,None
+1641,1000303,F875,None,None,None,None
+1642,1000305,F876,None,None,None,None
+220,1000148,F877,None,None,None,None
+1644,1000307,F878,None,None,None,None
+1624,1000253,F879,None,None,None,None
+1640,1000296,F880,None,None,None,None
+1616,1000235,F881,None,None,None,None
+1619,1000245,F882,None,None,None,None
+1622,1000250,F883,None,None,None,None
+1623,1000251,F884,None,None,None,None
+155,1000066,F885,None,None,None,None
+1615,1000233,F886,None,None,None,None
+119,1000028,F887,None,None,None,None
+120,1000029,F888,None,None,None,None
+159,1000069,F889,None,None,None,None
+160,1000070,F890,None,None,None,None
+161,1000075,F891,None,None,None,None
+162,1000076,F892,None,None,None,None
+143,1000049,F893,None,None,None,None
+144,1000050,F894,None,None,None,None
