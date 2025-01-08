@@ -307,7 +307,7 @@ def heatmapReferences(snpProportion, sampleMeta, allVarieties, tick_type):
         tickType: 'inventory' (inventory number), 'short_name' (sample number), 'divergence' (label divergence score), 'source' (sample source), 'references' (reference name)
     """
     
-    refShort = sampleMeta[np.isin(sampleMeta['reference_original'],allVarieties)]['short_name'].values.astype('str')
+    refShort = sampleMeta[np.isin(sampleMeta['reference_original'],allVarieties) | np.isin(sampleMeta['reference'],allVarieties)]['short_name'].values.astype('str')
     refShort = refShort[np.isin(refShort.astype(str), snpProportion.columns)]
     subset = snpProportion[refShort].values
     subsetReorder, clusterOrder, breakPoints = clusterReorder(subset, [subset.shape[1]])
