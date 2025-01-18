@@ -698,8 +698,9 @@ def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None, cutof
         
     #histogram of occurences of genetic entities
     plt.figure()
-    plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
-    plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
+    if (landraceVarietiesCount.size > 0):
+        plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
+        plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
     plt.tight_layout()
     if filePrefix:
         plt.savefig(filePrefix + ' genetic entity histogram.png', dpi = 300)
