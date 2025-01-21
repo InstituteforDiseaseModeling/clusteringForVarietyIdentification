@@ -308,7 +308,7 @@ def heatmapReferences(snpProportion, sampleMeta, allVarieties, tick_type):
     """
     
     refShort = sampleMeta[
-        np.isin(sampleMeta['reference_original'],allVarieties) if 'reference_original' in sampleMeta > 0 else np.array([False]) | 
+        np.isin(sampleMeta['reference_original'],allVarieties) if 'reference_original' in sampleMeta else np.array([False]) | 
         np.isin(sampleMeta['reference'],allVarieties)
     ]['short_name'].values.astype('str')
 
