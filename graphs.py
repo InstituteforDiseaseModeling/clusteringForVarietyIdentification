@@ -307,7 +307,11 @@ def heatmapReferences(snpProportion, sampleMeta, allVarieties, tick_type):
         tickType: 'inventory' (inventory number), 'short_name' (sample number), 'divergence' (label divergence score), 'source' (sample source), 'references' (reference name)
     """
     
-    refShort = sampleMeta[np.isin(sampleMeta['reference_original'],allVarieties)]['short_name'].values.astype('str')
+    refShort = sampleMeta[
+        (np.isin(sampleMeta['reference_original'],allVarieties) if 'reference_original' in sampleMeta else np.array([False])) | 
+        np.isin(sampleMeta['reference'],allVarieties)
+    ]['short_name'].values.astype('str')
+
     refShort = refShort[np.isin(refShort.astype(str), snpProportion.columns)]
     subset = snpProportion[refShort].values
     subsetReorder, clusterOrder, breakPoints = clusterReorder(subset, [subset.shape[1]])
@@ -702,8 +706,9 @@ def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None, cutof
         
     #histogram of occurences of genetic entities
     plt.figure()
-    plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
-    plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
+    if (landraceVarietiesCount.size > 0):
+        plt.hist(landraceVarietiesCount, bins = np.arange(max(landraceVarietiesCount)+2))
+        plt.xticks(np.arange(1,max(landraceVarietiesCount)+2))
     plt.tight_layout()
     if filePrefix:
         plt.savefig(filePrefix + ' genetic entity histogram.png', dpi = 300)

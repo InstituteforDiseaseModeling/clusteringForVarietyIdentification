@@ -85,7 +85,7 @@ def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, 
         filePrefix: prefix for output filenames
     '''    
     #cluster using DBSCAN
-    db_communities = DBSCAN(eps=epsilon, min_samples=2).fit(embedding).labels_
+    db_communities = DBSCAN(eps=epsilon, min_samples=1).fit(embedding).labels_
     
     #save output figures
     plot.umapCluster(embedding, db_communities)
@@ -134,23 +134,18 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     output['variety'] = pd.NA    
     
     for cluster in np.unique(db_communities):
-        if cluster == -1: #-1 indicates samples that are disconnected from the rest of the clusters  
-            subsetIndex = np.where(db_communities == cluster)[0]
-            output.loc[subsetIndex,'variety'] = 'Admixed'
+        #subset for a single DBSCAN cluster
+        subsetIndex = np.where(db_communities == cluster)[0]
             
-        else:
-            #subset for a single DBSCAN cluster
-            subsetIndex = np.where(db_communities == cluster)[0]
-                
-            #cluster subset of samples using heirarchical clustering
-            Y_cluster = sch.linkage(snpProportion[snpProportion.columns[subsetIndex]].values.T, metric='correlation')
-            
-            #label samples
-            communities, names = rand.labelHCLandrace(snpProportion[snpProportion.columns[subsetIndex]], sampleMeta, Y_cluster, cutHeight, clusterNumber = cluster, admixedCutoff = admixedCutoff)
-            varietiesList = []
-            for i in communities.astype('int'):
-                varietiesList.append(names[i][0])          
-            output.loc[subsetIndex,'variety'] = varietiesList
+        #cluster subset of samples using heirarchical clustering
+        Y_cluster = sch.linkage(snpProportion[snpProportion.columns[subsetIndex]].values.T, metric='correlation')
+        
+        #label samples
+        communities, names = rand.labelHCLandrace(snpProportion[snpProportion.columns[subsetIndex]], sampleMeta, Y_cluster, cutHeight, clusterNumber = cluster, admixedCutoff = admixedCutoff)
+        varietiesList = []
+        for i in communities.astype('int'):
+            varietiesList.append(names[i][0])          
+        output.loc[subsetIndex,'variety'] = varietiesList
     
     #save outputs
     plot.umapRefLandrace(snpProportion, output, sampleMeta, 5, noRef=True)
