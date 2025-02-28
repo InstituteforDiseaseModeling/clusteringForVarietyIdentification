@@ -112,7 +112,7 @@ def evaluateEpsilon(embedding, filePrefix):
     rand.randScoreMatrix(embedding, ks, 'DBSCAN')
     plt.savefig(filePrefix+' DBSCAN rand matrix.png', dpi = 300)    
 
-def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, admixedCutoff, filePrefix):
+def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, admixedCutoff, filePrefix, snpProportionNoInterpolation, parameterFile):
     '''
     Evaluate different cut height values for processing the dendrogram
     
@@ -158,10 +158,34 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     
     plot.barchartRef(snpProportion, output, sampleMeta)
     plt.savefig(filePrefix+' bar chart clustering predictions (cut height'+str(cutHeight)+').png', dpi = 300)
+        
+    #add missingness
+    output['missingness'] = ((snpProportionNoInterpolation.isna().sum(axis = 0)[snpProportion.columns])/snpProportionNoInterpolation.shape[1]).values
+    
+    #add heterozygosity
+    output['heterozygosity'] = (((snpProportion >= 0.95).sum(axis = 0) + (snpProportion <= 0.05).sum(axis = 0)) / snpProportion.shape[0]).values
     
     output.to_csv(filePrefix+'_clusteringOutputData_cutHeight'+str(cutHeight)+'.csv', index=False)
     
-    return output
+    #append sampleMeta
+    metaOrder = []
+    for i in output['short_name']:
+         metaOrder.append(np.where(sampleMeta['short_name'] == int(i))[0][0])
+     
+    sampleMetaCrop = sampleMeta.iloc[metaOrder]
+    sampleMetaCrop.index = output.index
+    output2 = pd.concat([output, sampleMetaCrop], axis=1)
+     
+    #add paramters
+    with open(parameterFile) as f:
+        data = json.load(f)
+        
+    print(data, len(data), list(dict.items(data)))
+    output2['parameters'] = np.nan    
+    output2['parameters'].iloc[0:len(data)] = list(dict.items(data))
+     
+    return output, output2
+    
 
 def loadParameters(parameterFile):
     '''
@@ -198,7 +222,7 @@ def runPipeline(parameterFile):
     snpProportion, snpProportionNoInterpolation, sampleMeta = filterData(inputCountsFile, inputMetaFile, minloci, minSample)
     embedding = embedData(snpProportion, umapSeed)
     db_communities = clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff)
-    output = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix)
+    output, output2 = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix, snpProportionNoInterpolation, parameterFile)
     
     return snpProportion, snpProportionNoInterpolation, sampleMeta, embedding, db_communities, output
 
@@ -207,4 +231,4 @@ if __name__ == '__main__':
     snpProportion, snpProportionNoInterpolation, sampleMeta = filterData(inputCountsFile, inputMetaFile, minloci, minSample)
     embedding = embedData(snpProportion, umapSeed)
     db_communities = clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, admixedCutoff)
-    output = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix)
+    output, output2 = labelSamples(snpProportion, sampleMeta, db_communities, embedding, cutHeight, admixedCutoff, filePrefix, snpProportionNoInterpolation, parameterFile)
