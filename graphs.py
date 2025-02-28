@@ -542,7 +542,7 @@ def histogramDivergence(snpProportion,sampleMeta):
     ax2.set_xlabel('Mean divergence')
     plt.tight_layout()
     
-def dendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, tick_type='sampleRef'):
+def dendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, tick_type='sampleRef', cutLine = False):
     """
     Dendrogram
 
@@ -553,6 +553,7 @@ def dendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, tick_type
         COI: DBSCAN cluster to plot
         cutHeight: cutoff value for cutting a dendrogram into clusters 
         tick_type: 'sampleRef' (label as sample number or reference), 'references' (only label references)
+        cutLine: if True, plot a horizontal line at this value
     """
 
     clusterSubset = snpProportion[snpProportion.columns[np.where(communities == COI)]]
@@ -579,9 +580,11 @@ def dendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, tick_type
     #plot dendrogram
     plt.figure(figsize=(14.4,4.8))
     sch.dendrogram(Y_cluster, labels = labels, color_threshold = cutHeight) #sample names
+    if cutLine:
+        plt.plot([0,10*clusterSubset.shape[1]],[cutLine, cutLine],'k')
     plt.tight_layout()
 
-def umapReleaseYear(snpProportion, sampleMeta, embedding):#heat missingness
+def umapReleaseYear(snpProportion, sampleMeta, embedding):
     """
     UMAP where samples are colored by release year
 
@@ -649,7 +652,7 @@ def umapRefCalls(snpProportion, output, sampleMeta, noRef=False, minYear=None):
     ax1.legend(markerscale=5, fontsize=5)   
     plt.tight_layout()
 
-def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cutHeight, heatmapTick = 'referencesAll', dendrogramTick = 'references'): 
+def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cutHeight, heatmapTick = 'referencesAll', dendrogramTick = 'references', cutLine = False): 
     """
     Generate a heatmap and dendrogram for each cluster
 
@@ -661,12 +664,13 @@ def heatmapDendrogramAll(snpProportion, sampleMeta, communities, filePrefix, cut
         cutHeight: cutoff value for cutting a dendrogram into clusters
         heatmapTick: see options in heatmapManyClusters()
         dendrogramTick: see options in dendrogram()
+        cutLine: if True, plot a horizontal line at this value
     """
     for clusterNum in np.unique(communities):
         heatmapManyClusters(snpProportion, sampleMeta, communities, [clusterNum], tickType=heatmapTick)
         plt.savefig(filePrefix+' heatmap cluster '+str(clusterNum)+'.png', dpi = 300)
 
-        dendrogram(snpProportion, sampleMeta, communities, clusterNum, cutHeight, tick_type=dendrogramTick)
+        dendrogram(snpProportion, sampleMeta, communities, clusterNum, cutHeight, tick_type=dendrogramTick, cutLine = False)
         plt.savefig(filePrefix+' dendrogram cluster '+str(clusterNum)+' (cut height'+str(cutHeight)+').png', dpi = 300)
 
 def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None, cutoff = 2):
@@ -704,7 +708,7 @@ def barchartLandrace(snpProportion, output, sampleMeta, filePrefix = None, cutof
     if filePrefix:
         plt.savefig(filePrefix + ' genetic entity histogram.png', dpi = 300)
 
-def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight):
+def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, cutLine = False):
     """
     Paired dendrogram and heatmap for the same cluster
 
@@ -714,6 +718,7 @@ def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight):
         communities: DBSCAN cluster number for each sample
         COI: DBSCAN cluster to plot
         cutHeight: cutoff value for cutting a dendrogram into clusters 
+        cutLine: if True, plot a horizontal line at this value
     """
     fig = plt.figure(figsize=(7.2,12))
     gs=GridSpec(2,2, width_ratios=[0.2,6], height_ratios=[1,1], figure = fig)    
@@ -725,6 +730,8 @@ def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight):
     #plot dendrogram
     ax1 = plt.subplot(gs[0,1])
     sch.dendrogram(Y_cluster, color_threshold = cutHeight, no_labels = True)
+    if cutLine:
+        plt.plot([0,10*clusterSubset.shape[1]],[cutLine, cutLine],'k')
     ax1.set_title('Cluster '+str(COI))
 
     #heatmap half
