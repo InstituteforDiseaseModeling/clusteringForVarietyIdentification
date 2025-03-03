@@ -158,7 +158,7 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     output['missingness'] = ((snpProportionNoInterpolation.isna().sum(axis = 0)[snpProportion.columns])/snpProportionNoInterpolation.shape[1]).values
     
     #add heterozygosity
-    output['heterozygosity'] = (((snpProportion >= 0.95).sum(axis = 0) + (snpProportion <= 0.05).sum(axis = 0)) / snpProportion.shape[0]).values
+    output['heterozygosity'] = (((0.05 < snpProportion < 0.95).sum(axis = 0)) / snpProportion.shape[0]).values
     
     output.to_csv(filePrefix+'_clusteringOutputData_cutHeight'+str(cutHeight)+'.csv', index=False)
     
@@ -175,9 +175,9 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     with open(parameterFile) as f:
         data = json.load(f)
         
-    print(data, len(data), list(dict.items(data)))
     output2['parameters'] = np.nan    
     output2['parameters'].iloc[0:len(data)] = list(dict.items(data))
+    output2.to_csv(filePrefix+'_clusteringOutputAllData_cutHeight'+str(cutHeight)+'.csv', index=False)
      
     return output, output2
     
