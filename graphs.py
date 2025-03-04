@@ -585,7 +585,7 @@ def dendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, tick_type
     plt.figure(figsize=(14.4,4.8))
     sch.dendrogram(Y_cluster, labels = labels, color_threshold = cutHeight) #sample names
     if cutLine:
-        plt.plot([0,10*clusterSubset.shape[1]],[cutLine, cutLine],'k')
+        plt.plot([0,10*clusterSubset.shape[1]],[cutHeight, cutHeight],'k')
     plt.tight_layout()
 
 def umapReleaseYear(snpProportion, sampleMeta, embedding):
@@ -736,7 +736,7 @@ def heatmapDendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, cu
     ax1 = plt.subplot(gs[0,1])
     sch.dendrogram(Y_cluster, color_threshold = cutHeight, no_labels = True)
     if cutLine:
-        plt.plot([0,10*clusterSubset.shape[1]],[cutLine, cutLine],'k')
+        plt.plot([0,10*clusterSubset.shape[1]],[cutHeight, cutHeight],'k')
     ax1.set_title('Cluster '+str(COI))
 
     #heatmap half
