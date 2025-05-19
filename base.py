@@ -108,7 +108,7 @@ def evaluateEpsilon(embedding, filePrefix):
         embedding: UMAP embedding of snpProportion
         filePrefix: prefix for output filenames
     '''
-    ks = np.around(np.arange(0.1,1.1,0.05), 2) # Range of epsilon values for DBSCAN
+    ks = np.around(np.arange(0.1,3.15,0.15), 2) # Range of epsilon values for DBSCAN
     rand.randScoreMatrix(embedding, ks, 'DBSCAN')
     plt.savefig(filePrefix+' DBSCAN rand matrix.png', dpi = 300)    
 
