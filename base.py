@@ -100,15 +100,18 @@ def clusteringDBSCAN(snpProportion, sampleMeta, embedding, epsilon, filePrefix, 
    
     return db_communities
 
-def evaluateEpsilon(embedding, filePrefix):
+def evaluateEpsilon(embedding, filePrefix, epsilonRangeStart = 0.1, epsilonRangeStop = 3.15, epsilonRangeStep = 0.15):
     '''
     Evaluate different epsilon values for DBSCAN
         
     Args:
         embedding: UMAP embedding of snpProportion
         filePrefix: prefix for output filenames
+        epsilonRangeStart: (optional) epsilon range start
+        epsilonRangeStop: (optional) epsilon range stop
+        epsilonRangeStep: (optional) epsilon range step
     '''
-    ks = np.around(np.arange(0.1,3.15,0.15), 2) # Range of epsilon values for DBSCAN
+    ks = np.around(np.arange(epsilonRangeStart, epsilonRangeStop, epsilonRangeStep), 2) # Range of epsilon values for DBSCAN
     rand.randScoreMatrix(embedding, ks, 'DBSCAN')
     plt.savefig(filePrefix+' DBSCAN rand matrix.png', dpi = 300)    
 
