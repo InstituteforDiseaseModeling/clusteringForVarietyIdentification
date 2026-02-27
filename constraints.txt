@@ -1,0 +1,11 @@
+numpy==1.23.5
+pandas==1.5.2
+scipy==1.10.0
+scikit-learn==1.6.1
+umap-learn==0.5.7
+numba==0.60.0
+llvmlite==0.43.0
+matplotlib==3.6.2
+pynndescent==0.5.13
+joblib==1.5.1
+threadpoolctl==3.6.0

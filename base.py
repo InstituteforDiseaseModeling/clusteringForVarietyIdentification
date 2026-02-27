@@ -67,7 +67,7 @@ def embedData(snpProportion, umapSeed):
         umapSeed: RNG seed for umap embedding
     '''
     #UMAP embedding
-    reducer = umap.UMAP(random_state=umapSeed)
+    reducer = umap.UMAP(random_state=umapSeed, init='random')
     embedding = reducer.fit_transform(snpProportion.T) #the order is the same after embedding
     
     return embedding
