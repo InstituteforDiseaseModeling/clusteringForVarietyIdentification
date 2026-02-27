@@ -43,6 +43,20 @@ docker run --platform linux/amd64 \
 
 File paths in your parameters JSON can be either relative (e.g. `"counts.csv"`) or absolute with the `/data/` prefix (e.g. `"/data/counts.csv"`). Output files (plots and CSVs) will be written back to the mounted directory.
 
+### Development workflow (iterating locally with Docker)
+
+The default `docker build` bakes your source code into the image. To iterate on code changes without rebuilding, mount your local repo into the container with `-v $(pwd):/app`:
+
+```bash
+docker run --platform linux/amd64 \
+  -v $(pwd):/app \
+  -v /path/to/your/data:/data -w /data \
+  clustering-analysis \
+  -c "import sys; sys.path.insert(0, '/app'); from base import runPipeline; runPipeline('/data/yourParameters.json')"
+```
+
+This maps your local files into `/app`, so any edits to `.py` files are picked up on the next `docker run` — no rebuild needed. Note that results may differ from the frozen image if you modify code or dependencies.
+
 ### Running outside Docker
 
 To get results matching the Docker image on a bare-metal Linux (x86_64) machine, install dependencies with constraints and set the same environment variables:
