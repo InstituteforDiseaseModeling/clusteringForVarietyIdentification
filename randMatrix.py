@@ -32,7 +32,7 @@ def calc_cluster_characteristics(k, data, clusteringMethod, **kwargs):
     
     elif clusteringMethod == 'HC':
         Y_cluster = sch.linkage(data.values.T, metric='correlation') 
-        results['communities'], _ = labelHCLandrace(data, sampleMeta, Y_cluster, cutHeight = k, newVariety = False)
+        results['communities'], _, _ = labelHCLandrace(data, sampleMeta, Y_cluster, cutHeight = k, newVariety = False)
         
     else:
         print('invalid clustering method')
@@ -91,7 +91,9 @@ def randScoreMatrix(data, ks, clusteringMethod, **kwargs):
     
 def labelHCLandrace(clusterSubset, sampleMeta, Y_cluster, cutHeight, clusterNumber = 0, admixedCutoff = None, newVariety = True):
     """
-    Take a dendrogram and label samples that match a reference variety, otherwise label as admixed or a new variety 
+    Take a dendrogram and label samples that match a reference variety, otherwise
+    label them as a new variety. Sub-clusters whose divergence meets admixedCutoff
+    are reported through the returned admixedFlags rather than by withholding a name.
 
     Args:
         clusterSubset: processed SNP proportion data subset to a single DBSCAN cluster
@@ -99,11 +101,17 @@ def labelHCLandrace(clusterSubset, sampleMeta, Y_cluster, cutHeight, clusterNumb
         clusterNumber: DBSCAN cluster number
         cutHeight: cutoff value for cutting a dendrogram into clusters 
         sampleMeta: metadata paired with genotyping data
-        admixedCutoff: divergence cutoff to differentiate between admixtures and non reference varieties
+        admixedCutoff: divergence cutoff above which a non-reference sub-cluster is flagged as admixed
+
+    Returns:
+        subClusterNumber: index into subClusterNames for each sample
+        subClusterNames: variety name per sub-cluster index
+        admixedFlags: boolean per sample, True where the sub-cluster met admixedCutoff
     """
     references = sampleMeta[(sampleMeta['reference'].notna())]
-    subClusterNumber = np.zeros(len(Y_cluster)+1) #zero is admixed
-    subClusterNames = [['Admixed']]
+    subClusterNumber = np.zeros(len(Y_cluster)+1) #zero is unassigned
+    subClusterNames = [['Unassigned']]
+    admixedFlags = np.full(len(Y_cluster)+1, False)
     counter = 0
     
     subClusters = sch.cut_tree(Y_cluster, height = cutHeight)
@@ -123,18 +131,16 @@ def labelHCLandrace(clusterSubset, sampleMeta, Y_cluster, cutHeight, clusterNumb
                 
             subClusterNumber[sampleIndex.tolist()] = np.where(subClusterNames == refInSubCluster)[0][0]
           
-        elif newVariety: #add new non reference varieties            
-            if not admixedCutoff: #no admixedCutoff
-                subClusterNames.append(['Genetic entity-'+str(clusterNumber)+'-'+str(counter)]) 
-                subClusterNumber[sampleIndex.tolist()] = (len(subClusterNames)-1)
-                counter += 1  
-            
-            elif min(plot.homozygousDivergence(clusterSubset.values[:,sampleIndex])) < admixedCutoff: #at least one sample must be less than admixedCutoff         
-                subClusterNames.append(['Genetic entity-'+str(clusterNumber)+'-'+str(counter)]) 
-                subClusterNumber[sampleIndex.tolist()] = (len(subClusterNames)-1)
-                counter += 1
-                
-    return subClusterNumber, subClusterNames        
+        elif newVariety: #add new non reference varieties
+            subClusterNames.append(['Genetic entity-'+str(clusterNumber)+'-'+str(counter)])
+            subClusterNumber[sampleIndex.tolist()] = (len(subClusterNames)-1)
+            counter += 1
+
+            #report admixture separately rather than withholding the name
+            if admixedCutoff and min(plot.homozygousDivergence(clusterSubset.values[:,sampleIndex])) >= admixedCutoff:
+                admixedFlags[sampleIndex.tolist()] = True
+
+    return subClusterNumber, subClusterNames, admixedFlags
 
 
 def cutoffQuality(clusterSubset, sampleMeta, Y_cluster):
