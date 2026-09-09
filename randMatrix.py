@@ -28,7 +28,7 @@ def calc_cluster_characteristics(k, data, clusteringMethod, **kwargs):
     sampleMeta = kwargs.get('sampleMeta', None)
     
     if clusteringMethod == 'DBSCAN':
-        results['communities'] = DBSCAN(eps=k, min_samples=2).fit(data).labels_
+        results['communities'] = DBSCAN(eps=k, min_samples=1).fit(data).labels_
     
     elif clusteringMethod == 'HC':
         Y_cluster = sch.linkage(data.values.T, metric='correlation') 
