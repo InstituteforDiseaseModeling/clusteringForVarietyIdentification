@@ -158,8 +158,9 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     output['short_name'] = snpProportion.columns
     if admixedCutoff:
         output['divergence'] = plot.homozygousDivergence(snpProportion)
-    output['variety'] = pd.NA    
-    
+        output['admixed_flag'] = False
+    output['variety'] = pd.NA
+
     for cluster in np.unique(db_communities):
         #subset for a single DBSCAN cluster
         subsetIndex = np.where(db_communities == cluster)[0]
@@ -174,17 +175,21 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
                 output.loc[subsetIndex[0], 'variety'] = ref_val
             else:
                 output.loc[subsetIndex[0], 'variety'] = 'Genetic entity-' + str(cluster) + '-0'
+            if admixedCutoff:
+                output.loc[subsetIndex[0], 'admixed_flag'] = False
             continue
 
         #cluster subset of samples using heirarchical clustering
         Y_cluster = sch.linkage(snpProportion[snpProportion.columns[subsetIndex]].values.T, metric='correlation')
         
         #label samples
-        communities, names = rand.labelHCLandrace(snpProportion[snpProportion.columns[subsetIndex]], sampleMeta, Y_cluster, cutHeight, clusterNumber = cluster, admixedCutoff = admixedCutoff)
+        communities, names, admixedFlags = rand.labelHCLandrace(snpProportion[snpProportion.columns[subsetIndex]], sampleMeta, Y_cluster, cutHeight, clusterNumber = cluster, admixedCutoff = admixedCutoff)
         varietiesList = []
         for i in communities.astype('int'):
             varietiesList.append(names[i][0])          
         output.loc[subsetIndex,'variety'] = varietiesList
+        if admixedCutoff:
+            output.loc[subsetIndex,'admixed_flag'] = admixedFlags
     
     #save outputs
     plot.umapRefLandrace(snpProportion, output, sampleMeta, 5, noRef=True)
