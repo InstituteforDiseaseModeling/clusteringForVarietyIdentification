@@ -15,6 +15,29 @@ import graphs as plot
 import randMatrix as rand
 import referenceProcessing
  
+def normalizeReferenceColumns(sampleMeta):
+    '''
+    Trim whitespace from the reference columns and convert blank values to NaN.
+
+    Blank-but-not-null cells ('', ' ') pass pandas' .notna() check, so an empty
+    reference is treated as a real variety: it survives into the reference set,
+    sorts first in np.unique, and is concatenated into designations like '+VarA'.
+    Untrimmed values are equally damaging - ' VarA' and 'VarA' read as two
+    distinct varieties and merge into ' VarA+VarA'. Normalizing once here covers
+    every downstream sampleMeta['reference'].notna() lookup.
+
+    Args:
+        sampleMeta: metadata paired with genotyping data
+    '''
+    for column in ['reference', 'reference_original']:
+        if column not in sampleMeta.columns:
+            continue
+        values = sampleMeta[column]
+        trimmed = values.where(values.isna(), values.astype('str').str.strip())
+        sampleMeta[column] = trimmed.replace('', np.nan)
+
+    return sampleMeta
+
 def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     '''
     Input the reformatted counts file and paired metadata file, filter out low quality samples/genes and then interpolate missing data 
@@ -36,6 +59,7 @@ def filterData(countsFile, metaFile, minloci, minSample, refFilter = None):
     
     #import sample metadata
     sampleMeta = pd.read_csv(metaFile)
+    sampleMeta = normalizeReferenceColumns(sampleMeta)
     refRemove = sampleMeta[sampleMeta['reference'] == 'REMOVE']['short_name'].values.astype('str')
     
     #optionally remove references above a divergence cutoff
@@ -139,7 +163,19 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     for cluster in np.unique(db_communities):
         #subset for a single DBSCAN cluster
         subsetIndex = np.where(db_communities == cluster)[0]
-            
+
+        if len(subsetIndex) < 2:
+            #a cluster of one (e.g. a lone DBSCAN noise sample) has no distance
+            #matrix, so sch.linkage below would raise; label it directly instead
+            sample_name = snpProportion.columns[subsetIndex[0]]
+            ref_match = sampleMeta[sampleMeta['short_name'] == int(sample_name)]
+            ref_val = ref_match['reference'].values[0] if len(ref_match) > 0 and pd.notna(ref_match['reference'].values[0]) else None
+            if ref_val:
+                output.loc[subsetIndex[0], 'variety'] = ref_val
+            else:
+                output.loc[subsetIndex[0], 'variety'] = 'Genetic entity-' + str(cluster) + '-0'
+            continue
+
         #cluster subset of samples using heirarchical clustering
         Y_cluster = sch.linkage(snpProportion[snpProportion.columns[subsetIndex]].values.T, metric='correlation')
         
@@ -178,8 +214,11 @@ def labelSamples(snpProportion,sampleMeta,db_communities,embedding, cutHeight, a
     with open(parameterFile) as f:
         data = json.load(f)
         
-    output2['parameters'] = np.nan    
-    output2['parameters'].iloc[0:len(data)] = list(dict.items(data))
+    #chained assignment (df['col'].iloc[...] = ...) writes to a temporary under
+    #pandas copy-on-write and is silently lost; assign positionally instead
+    output2['parameters'] = pd.array([np.nan] * len(output2), dtype=object)
+    for i, (k, v) in enumerate(data.items()):
+        output2.at[output2.index[i], 'parameters'] = str((k, v))
     output2.to_csv(filePrefix+'_clusteringOutputAllData_cutHeight'+str(cutHeight)+'.csv', index=False)
      
     return output, output2
