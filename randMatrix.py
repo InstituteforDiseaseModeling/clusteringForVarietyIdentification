@@ -110,7 +110,10 @@ def labelHCLandrace(clusterSubset, sampleMeta, Y_cluster, cutHeight, clusterNumb
     for cluster in np.unique(subClusters):
         sampleIndex = np.where(subClusters == cluster)[0]
         shortName = clusterSubset.columns[sampleIndex][np.isin(clusterSubset.columns[sampleIndex], references['short_name'].values.astype('str'))]
-        refInSubCluster = np.unique(sampleMeta[sampleMeta['short_name'].isin(shortName.astype('int'))]['reference'])
+        #drop null/blank references before flattening so they can't produce a leading '+'
+        refValues = sampleMeta[sampleMeta['short_name'].isin(shortName.astype('int'))]['reference']
+        refValues = refValues[refValues.notna() & (refValues.astype('str').str.strip() != '')]
+        refInSubCluster = np.unique(refValues.astype('str').str.strip())
         
         if (len(refInSubCluster) > 0): #if there's a reference in the cluster 
             if (len(refInSubCluster) > 1): #if multiple references, flatten       
