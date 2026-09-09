@@ -563,6 +563,10 @@ def dendrogram(snpProportion, sampleMeta, communities, COI, cutHeight, tick_type
     clusterSubset = snpProportion[snpProportion.columns[np.where(communities == COI)]]
     Y_cluster = sch.linkage(clusterSubset.values.T, metric='correlation') #sort samples
 
+    #default to sample names; the branches below overwrite this when a tick_type
+    #is given. Without it any other tick_type leaves labels unbound.
+    labels = np.copy(clusterSubset.columns.values)
+
     if tick_type == 'sampleRef': #add sample number and reference to x-ticks
         references = sampleMeta[(sampleMeta['reference'].notna())]
         refInCluster = clusterSubset.columns[np.isin(clusterSubset.columns, references['short_name'].values.astype('str'))]
