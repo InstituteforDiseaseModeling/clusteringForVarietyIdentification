@@ -40,14 +40,42 @@ def clusterReorder(subset, counts):
 
     return subsetReorder[:,clusterOrder], clusterOrder, breakPoints
 
+def divergenceMarkerCount(x):
+    """
+    Number of markers per sample that count toward the divergence score, i.e.
+    those confidently homozygous for either allele (proportion < 0.2 or > 0.8).
+
+    This is the denominator homozygousDivergence divides by, exposed separately
+    so callers can report how many markers a divergence value rests on -- a
+    score built from a handful of markers deserves less weight than one built
+    from hundreds.
+
+    Args:
+        x: processed SNP proportion data (markers x samples)
+    """
+    #np.asarray so a DataFrame yields a positional array rather than a Series
+    #keyed by sample name -- assigning such a Series to an output column would
+    #align on index and silently produce all-NaN
+    values = np.asarray(x, dtype = float)
+    return np.sum((values < 0.2) | (values > 0.8), axis = 0)
+
 def homozygousDivergence(x):
     """
     Calculate the divergence for a numpy array of processed SNP proportion data
+
+    Args:
+        x: processed SNP proportion data (markers x samples)
     """
-    _, total = np.unique(np.where((x < 0.2) | (x > 0.8))[1], return_counts=True)
-    highDivergence = np.nansum(1 - np.where(x > 0.8, x, np.nan), axis = 0)
-    lowDivergence = np.nansum(np.where(x < 0.2, x, np.nan), axis = 0)
-    return (lowDivergence + highDivergence)/ total
+    total = divergenceMarkerCount(x)
+    values = np.asarray(x, dtype = float)
+    highDivergence = np.nansum(1 - np.where(values > 0.8, values, np.nan), axis = 0)
+    lowDivergence = np.nansum(np.where(values < 0.2, values, np.nan), axis = 0)
+
+    #a sample with no qualifying markers has no divergence to report; guard the
+    #division rather than emitting inf, and keep the result aligned to samples
+    return np.divide(lowDivergence + highDivergence, total,
+                     out = np.full(np.shape(total), np.nan, dtype = float),
+                     where = total > 0)
 
 def plotTemplate():
     """
